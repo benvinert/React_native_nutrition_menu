@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
 import {
   View,
@@ -15,30 +15,29 @@ import { NutritionTable } from "./NutritionTable";
 import AllMenus from "./AllMenus";
 import SelectMenuName from "./SelectMenuName";
 import ValuesOfFood from "./ValuesOfFood";
+import { INIT_STATE_OF_MENU } from "./initStateOfMenu";
+
+const menuReducer = (state, action) => {
+  switch (action.execute) {
+    case "add_food":
+      var prevMenu = state.menu;
+      prevMenu[action.param.indexOfMeal].foods.push(action.param.valuesOfFood);
+      return { ...state, menu: prevMenu };
+    case "remove_food":
+      return;
+    case "save_name_menu":
+      return { ...state, nameOfMenu: action.param };
+    default:
+      return state;
+  }
+};
 
 export default function NutritionTableNavigator({ route, navigation }) {
   const Stack = createStackNavigator();
-
-  const [menuState, setMenuState] = useState({
-    nameOfMenu: "default",
-    menu: [
-      {
-        mealTime: "Breakfast",
-        foods: [],
-      },
-      {
-        mealTime: "Lunch",
-        foods: [],
-      },
-      {
-        mealTime: "Dinner",
-        foods: [],
-      },
-    ],
-  });
+  const [menuState, menuDispatch] = useReducer(menuReducer, INIT_STATE_OF_MENU);
 
   return (
-    <createMenuContext.Provider value={{ menuState, setMenuState }}>
+    <createMenuContext.Provider value={{ menuState, menuDispatch }}>
       <Stack.Navigator initialRouteName={route.params.navigateTo}>
         <Stack.Screen name="AllMenus" component={AllMenus} />
         <Stack.Screen

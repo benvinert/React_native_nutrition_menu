@@ -6,7 +6,7 @@ import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 
 export const NutritionTable = ({ route, navigation }) => {
-  const { menuState, setMenuState } = useContext(createMenuContext);
+  const { menuState, menuDispatch } = useContext(createMenuContext);
   //Initial State of menu
   var menuObject;
   //get it from Menus Component

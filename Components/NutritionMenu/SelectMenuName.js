@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function SelectMenuName() {
   const [nameofMenu, setNameOfMenu] = useState("");
-  const { menuState, setMenuState } = useContext(createMenuContext);
+  const { menuState, menuDispatch } = useContext(createMenuContext);
   const navigation = useNavigation();
   return (
     <View>
@@ -17,7 +17,7 @@ export default function SelectMenuName() {
       <Button
         title="Save"
         onPress={() => {
-          setMenuState({ ...menuState, nameOfMenu: nameofMenu });
+          menuDispatch({ execute: "save_name_menu", param: nameofMenu });
           navigation.navigate("NutritionTable", { isNowCreated: true });
         }}
       />
