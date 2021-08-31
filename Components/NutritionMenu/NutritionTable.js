@@ -23,16 +23,18 @@ export const NutritionTable = ({ route, navigation }) => {
           <FlatList
             data={menuObject}
             keyExtractor={(item, index) => item.mealTime}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <Section
-                headerComponent={<HeaderSection mealTime={item.mealTime} />}
+                headerComponent={
+                  <HeaderSection mealTime={item.mealTime} indexOfMeal={index} />
+                }
               >
                 <View style={{ flex: 1 }}>
                   <FlatList
                     data={item.foods}
                     keyExtractor={(food, index) => food.name}
                     renderItem={(food) => (
-                      <CellVariant title={food.item.name} />
+                      <CellVariant title={food.item.name} foodDetails={food} />
                     )}
                   />
                 </View>

@@ -1,7 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function ValuesOfFood({ valuesOfFood }) {
+export default function ValuesOfFood({ valuesOfFood, route, navigation }) {
+  if (route != null && route != undefined) {
+    valuesOfFood = route.params.item;
+  }
+  console.log(valuesOfFood);
   return (
     <View style={styleSheet.textContainer}>
       <Text>Values of food</Text>

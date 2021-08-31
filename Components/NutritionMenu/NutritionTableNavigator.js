@@ -14,6 +14,7 @@ import { createMenuContext } from "./Context/createMenuContext";
 import { NutritionTable } from "./NutritionTable";
 import AllMenus from "./AllMenus";
 import SelectMenuName from "./SelectMenuName";
+import ValuesOfFood from "./ValuesOfFood";
 
 export default function NutritionTableNavigator({ route, navigation }) {
   const Stack = createStackNavigator();
@@ -47,6 +48,7 @@ export default function NutritionTableNavigator({ route, navigation }) {
         />
         <Stack.Screen name="Select name of menu" component={SelectMenuName} />
         <Stack.Screen name="Add food" component={AutoComplete} />
+        <Stack.Screen name="Values of food" component={ValuesOfFood} />
       </Stack.Navigator>
     </createMenuContext.Provider>
   );

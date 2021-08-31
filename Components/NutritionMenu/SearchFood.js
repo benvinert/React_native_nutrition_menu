@@ -7,17 +7,22 @@ import ValuesOfFood from "./ValuesOfFood";
 import { serverPath, getFood } from "../../Utils/EndPoints";
 import { createMenuContext } from "./Context/createMenuContext";
 
-export const AutoComplete = () => {
+export const AutoComplete = ({ route }) => {
   const { menuState, setMenuState } = useContext(createMenuContext);
   const [selectedItem, setSelectedItem] = useState(null);
   const [valuesOfFood, setValuesOfFood] = useState(null);
   const [showValues, setShowValues] = useState(false);
+  const indexOfMeal = route.params;
+  console.log(indexOfMeal);
+  const addCurrentFoodToMenu = () => {
+    // add here logic to add food
+  };
 
-  const getFoodById = async (foodId) => {
-    fetch(`${serverPath}${getFood.getFoodById}${foodId}`)
+  const getFoodById = async (food) => {
+    fetch(`${serverPath}${getFood.getFoodById}${food.id}`)
       .then((response) => response.json())
       .then((jsonResponse) => {
-        setValuesOfFood(jsonResponse);
+        setValuesOfFood({ ...jsonResponse, name: food.title });
         setShowValues(true);
       });
   };
@@ -29,7 +34,7 @@ export const AutoComplete = () => {
         closeOnBlur={false}
         onSelectItem={(item) => {
           if (item != null && item != undefined) {
-            getFoodById(item.id);
+            getFoodById(item);
           } else {
             setShowValues(false);
           }
@@ -41,7 +46,10 @@ export const AutoComplete = () => {
           placeholder: "Enter 3 Characters to search food",
         }}
       />
-      <Button title="Add to you're menu" onPress={() => console.log("bbbb")} />
+      <Button
+        title="Add to you're menu"
+        onPress={() => addCurrentFoodToMenu()}
+      />
       <View style={{ color: "#668", fontSize: 13 }}>
         {showValues && <ValuesOfFood valuesOfFood={valuesOfFood} />}
       </View>
