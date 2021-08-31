@@ -23,17 +23,15 @@ import {
   useDeviceOrientation,
 } from "@react-native-community/hooks";
 
-import { Header } from "./Components/Header";
 import { MaterialIcons } from "@expo/vector-icons";
 import "react-native-gesture-handler";
 import HelloScreen from "./Components/HelloScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { createStackNavigator } from "@react-navigation/stack";
 import { BmrCalculator } from "./Components/BmrCalculator";
-import CreateMenu from "./Components/CreateMenu/CreateMenu";
+import NutritionTableNavigator from "./Components/NutritionMenu/NutritionTableNavigator";
+import AllMenus from "./Components/NutritionMenu/AllMenus";
 
-const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 export default function App() {
@@ -45,40 +43,22 @@ export default function App() {
           component={HelloScreen}
           options={{ title: "Welcome" }}
         />
-        <Drawer.Screen name="Create menu" component={CreateMenu} />
-        <Drawer.Screen name="BMR Calculator" component={BmrCalculator} />
+        <Drawer.Screen
+          name="My menus"
+          component={NutritionTableNavigator}
+          initialParams={{ navigateTo: "AllMenus" }}
+        />
+        <Drawer.Screen
+          name="BMR Calculator"
+          initialParams={{ myname: "ben" }}
+          component={BmrCalculator}
+        />
+        <Drawer.Screen
+          name="Create Menu"
+          component={NutritionTableNavigator}
+          initialParams={{ navigateTo: "Select name of menu" }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-    justifyContent: "center",
-  },
-  item: {
-    display: "flex",
-    marginTop: 24,
-    padding: 30,
-    backgroundColor: "#cfd1d0",
-    flex: 1,
-  },
-  title: {
-    fontSize: 20,
-  },
-  delete: {
-    flexDirection: "row-reverse",
-    alignSelf: "flex-end",
-  },
-  autocompleteContainer: {
-    flex: 1,
-    left: 0,
-    position: "absolute",
-    right: 0,
-    top: 0,
-    zIndex: 1,
-  },
-});
