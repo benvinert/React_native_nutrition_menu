@@ -22,7 +22,7 @@ export const NutritionTable = ({ route, navigation }) => {
         <View style={{ height: 500 }}>
           <FlatList
             data={menuObject}
-            keyExtractor={(item, index) => item.mealTime}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <Section
                 headerComponent={
@@ -32,7 +32,7 @@ export const NutritionTable = ({ route, navigation }) => {
                 <View style={{ flex: 1 }}>
                   <FlatList
                     data={item.foods}
-                    keyExtractor={(food, index) => food.name}
+                    keyExtractor={(food, index) => index.toString()}
                     renderItem={(food) => (
                       <CellVariant title={food.item.name} foodDetails={food} />
                     )}

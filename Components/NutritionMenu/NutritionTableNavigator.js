@@ -19,13 +19,13 @@ import { INIT_STATE_OF_MENU } from "./initStateOfMenu";
 
 const menuReducer = (state, action) => {
   switch (action.execute) {
-    case "add_food":
+    case "ADD_FOOD":
       var prevMenu = state.menu;
       prevMenu[action.param.indexOfMeal].foods.push(action.param.valuesOfFood);
       return { ...state, menu: prevMenu };
-    case "remove_food":
+    case "REMOVE_FOOD":
       return;
-    case "save_name_menu":
+    case "SAVE_MENU_NAME":
       return { ...state, nameOfMenu: action.param };
     default:
       return state;

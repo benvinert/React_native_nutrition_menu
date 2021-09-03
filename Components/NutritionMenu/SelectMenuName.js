@@ -17,8 +17,11 @@ export default function SelectMenuName() {
       <Button
         title="Save"
         onPress={() => {
-          menuDispatch({ execute: "save_name_menu", param: nameofMenu });
-          navigation.navigate("NutritionTable", { isNowCreated: true });
+          menuDispatch({ execute: "SAVE_MENU_NAME", param: nameofMenu });
+          navigation.navigate("NutritionTable", {
+            isNowCreated: true,
+            nameOfMenu: nameofMenu,
+          });
         }}
       />
     </View>
