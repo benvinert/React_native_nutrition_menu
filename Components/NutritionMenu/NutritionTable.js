@@ -14,11 +14,17 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { localStorageKeys } from "../../Utils/Definitions";
+
+const addMenuToLocalStorage = (userMenus, menuObject) => {
+  userMenus.userMenus.push(menuObject);
+  AsyncStorage.setItem(localStorageKeys.USER_MENUS, JSON.stringify(userMenus));
+};
 
 export const NutritionTable = ({ route, navigation }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
   var userMenus;
-  AsyncStorage.getItem("userMenus").then((userMenusStorage) => {
+  AsyncStorage.getItem(localStorageKeys.USER_MENUS).then((userMenusStorage) => {
     if (userMenusStorage !== null) {
       userMenus = JSON.parse(userMenusStorage);
     }
@@ -64,8 +70,7 @@ export const NutritionTable = ({ route, navigation }) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          userMenus.userMenus.push(menuObject);
-          AsyncStorage.setItem("userMenus", JSON.stringify(userMenus));
+          addMenuToLocalStorage(userMenus, menuObject);
         }}
       >
         <Text style={{ color: "white", fontWeight: "bold" }}> Save </Text>

@@ -4,18 +4,21 @@ import { View, Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListItem, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { localStorageKeys } from "../../Utils/Definitions";
 
 export default function AllMenus() {
   const [isLoading, setIsLoading] = useState(true);
   const [userMenus, setUserMenus] = useState({ userMenus: [] });
 
   useEffect(() => {
-    AsyncStorage.getItem("userMenus").then((userMenusFromStorage) => {
-      if (userMenusFromStorage != null) {
-        setUserMenus(JSON.parse(userMenusFromStorage));
-        setIsLoading(false);
+    AsyncStorage.getItem(localStorageKeys.USER_MENUS).then(
+      (userMenusFromStorage) => {
+        if (userMenusFromStorage != null) {
+          setUserMenus(JSON.parse(userMenusFromStorage));
+          setIsLoading(false);
+        }
       }
-    });
+    );
   }, []);
 
   const navigation = useNavigation();
