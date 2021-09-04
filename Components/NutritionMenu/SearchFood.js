@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useContext } from "react";
 import Autocomplete from "react-native-autocomplete-input";
-import { StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, View, StatusBar, AsyncStorageStatic } from "react-native";
 import { metafoods } from "../../Utils/metafoods";
 import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
 import ValuesOfFood from "./ValuesOfFood";
@@ -10,18 +10,19 @@ import { Tooltip, Text } from "react-native-elements";
 import { useToast } from "react-native-styled-toast";
 import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import GramsPicker from "./GramsPicker";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const AutoComplete = ({ route }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [valuesOfFood, setValuesOfFood] = useState(null);
+  const [valuesOfFood, setValuesOfFood] = useState({ grams: 100 }); //100g is a default
   const [showValues, setShowValues] = useState(false);
-  const [showToast, setShowToast] = useState(false);
   const indexOfMeal = route.params;
   const { toast } = useToast();
 
   const addCurrentFoodToMenu = () => {
-    if (valuesOfFood != null) {
+    if (valuesOfFood.name != undefined && valuesOfFood.name != null) {
       menuDispatch({
         execute: "ADD_FOOD",
         param: { valuesOfFood: valuesOfFood, indexOfMeal: indexOfMeal },
@@ -31,7 +32,6 @@ export const AutoComplete = ({ route }) => {
         iconFamily: "FontAwesome",
         iconName: "check-circle",
       });
-      setSelectedItem(null);
     } else {
       toast({
         message: "You're need to pick a food",
@@ -47,13 +47,18 @@ export const AutoComplete = ({ route }) => {
     await fetch(`${serverPath}${getFood.getFoodById}${food.id}`)
       .then((response) => response.json())
       .then((jsonResponse) => {
-        setValuesOfFood({ ...jsonResponse, name: food.title });
+        setValuesOfFood({
+          ...jsonResponse,
+          foodFromRequest: { ...jsonResponse }, //with that original object we calculate serving size(150g,200g,250g)
+          name: food.title,
+          grams: 100,
+        });
         setShowValues(true);
       });
   };
 
   return (
-    <View>
+    <ScrollView>
       <AutocompleteDropdown
         clearOnFocus={false}
         closeOnBlur={false}
@@ -71,6 +76,14 @@ export const AutoComplete = ({ route }) => {
           placeholder: "Enter 3 Characters to search food",
         }}
       />
+      <View style={{ alignSelf: "center" }}>
+        <Text style={{ alignSelf: "center" }}>Grams</Text>
+        <GramsPicker
+          setValuesOfFood={setValuesOfFood}
+          valuesOfFood={valuesOfFood}
+        />
+      </View>
+
       <Button
         title="Add to you're menu"
         icon={
@@ -85,11 +98,10 @@ export const AutoComplete = ({ route }) => {
         iconRight
         onPress={() => addCurrentFoodToMenu()}
       />
-      <Button title="show Menu" onPress={() => console.log(menuState)} />
       <View style={{ color: "#668", fontSize: 13 }}>
         {showValues && <ValuesOfFood valuesOfFood={valuesOfFood} />}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

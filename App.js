@@ -33,6 +33,7 @@ import NutritionTableNavigator from "./Components/NutritionMenu/NutritionTableNa
 import AllMenus from "./Components/NutritionMenu/AllMenus";
 import { ThemeProvider } from "styled-components/native";
 import { ToastProvider } from "react-native-styled-toast";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 const theme = {
@@ -48,6 +49,9 @@ const theme = {
   },
 };
 export default function App() {
+  AsyncStorage.getItem("userMenus").then((resp) =>
+    console.log("APP.js FROM storage : ", resp)
+  );
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>

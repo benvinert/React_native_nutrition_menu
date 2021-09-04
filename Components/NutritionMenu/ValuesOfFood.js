@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -17,40 +17,44 @@ export default function ValuesOfFood({ valuesOfFood, route, navigation }) {
   const data = [
     {
       name: "Protein",
-      amount: valuesOfFood.PROTEIN,
+      amount: valuesOfFood.PROTEIN / 100,
       color: "#E27D60",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Carbs",
-      amount: valuesOfFood.CARBS,
+      amount: valuesOfFood.CARBS / 100,
       color: "#8D8741",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Collesterol",
-      amount: valuesOfFood.COLLESTEROL,
+      amount: valuesOfFood.COLLESTEROL / 100,
       color: "#F64C72",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Fat",
-      amount: valuesOfFood.FAT,
+      amount: valuesOfFood.FAT / 100,
       color: "#41B3A3",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Fiber",
-      amount: valuesOfFood.FIBER,
+      amount: valuesOfFood.FIBER / 100,
       color: "#C38D9E",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
   ];
+
+  useEffect(() => {
+    console.log(valuesOfFood);
+  }, [valuesOfFood]);
 
   const chartConfig = {
     decimalPlaces: 2, // optional, defaults to 2dp
@@ -69,10 +73,16 @@ export default function ValuesOfFood({ valuesOfFood, route, navigation }) {
         style={{
           textAlign: "center",
           fontFamily: "sans-serif-light",
-          fontSize: 40,
+          fontSize: 30,
         }}
       >
         Values of food
+      </Text>
+      <Text style={{ textAlign: "center", fontSize: 22 }}>
+        {valuesOfFood.name}
+      </Text>
+      <Text style={{ textAlign: "center", fontSize: 22 }}>
+        Serving size : {valuesOfFood.grams}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", fontSize: 22 }}>
