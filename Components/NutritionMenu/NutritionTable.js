@@ -34,14 +34,34 @@ export const NutritionTable = ({ route, navigation }) => {
   });
 
   var menuObject;
-  const isNowCreated = route.params.isNowCreated;
+  const editAble = route.params.editAble;
   //Get it from Menus Component
-  if (!isNowCreated) {
+  if (!editAble) {
     menuObject = route.params;
   } else {
     //If is from process of creating menu
     menuObject = menuState;
   }
+
+  const SaveButton = () => (
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() => {
+        addMenuToLocalStorage(userMenus, menuObject);
+        toast({
+          message: "Menu save successfully",
+          iconFamily: "FontAwesome",
+          iconName: "check-circle",
+        });
+
+        setTimeout(() => {
+          navigation.navigate("AllMenus");
+        }, 2000);
+      }}
+    >
+      <Text style={{ color: "white", fontWeight: "bold" }}> Save </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -70,23 +90,7 @@ export const NutritionTable = ({ route, navigation }) => {
           />
         </View>
       </TableView>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          addMenuToLocalStorage(userMenus, menuObject);
-          toast({
-            message: "Menu save successfully",
-            iconFamily: "FontAwesome",
-            iconName: "check-circle",
-          });
-
-          setTimeout(() => {
-            navigation.navigate("AllMenus");
-          }, 2000);
-        }}
-      >
-        <Text style={{ color: "white", fontWeight: "bold" }}> Save </Text>
-      </TouchableOpacity>
+      {editAble ? <SaveButton /> : null}
     </SafeAreaView>
   );
 };
