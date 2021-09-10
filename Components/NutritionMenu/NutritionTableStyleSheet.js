@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, TouchableHighlight } from "react-native";
+import { Text, View, TouchableHighlight, StyleSheet } from "react-native";
 import { Cell } from "react-native-tableview-simple";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-elements";
@@ -32,11 +32,11 @@ export const CellVariant = (props) => {
   );
 };
 
-export const HeaderSection = ({ mealTime, indexOfMeal }) => {
+export const HeaderSection = ({ mealTime, indexOfMeal, isEditable }) => {
   const navigation = useNavigation();
-  return (
-    <View style={{ marginBottom: 10 }}>
-      <Text>{mealTime}</Text>
+
+  const AddButton = () => {
+    return (
       <TouchableHighlight>
         <View>
           <Button
@@ -45,6 +45,21 @@ export const HeaderSection = ({ mealTime, indexOfMeal }) => {
           />
         </View>
       </TouchableHighlight>
+    );
+  };
+
+  return (
+    <View style={{ marginBottom: 10 }}>
+      <Text style={styles.mealTimeStyle}>{mealTime}</Text>
+      {isEditable ? <AddButton /> : null}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  mealTimeStyle: {
+    fontSize: 19,
+    paddingLeft: 5,
+    alignSelf: "center",
+  },
+});

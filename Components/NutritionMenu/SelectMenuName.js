@@ -25,7 +25,7 @@ export default function SelectMenuName() {
         onPress={() => {
           if (nameofMenu.length >= 3) {
             menuDispatch({ execute: "SAVE_NAME_MENU", param: nameofMenu });
-            setNameOfMenu("");
+            setNameOfMenu(""); //Clear state
             navigation.navigate("NutritionTable", {
               isEditable: true,
               nameOfMenu: nameofMenu,
