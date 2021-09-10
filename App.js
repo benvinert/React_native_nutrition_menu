@@ -1,28 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  StatusBar,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  Image,
-  Alert,
-  Button,
-  SafeAreaView,
-  Platform,
-  Dimensions,
-  TextInput,
-  FlatList,
-} from "react-native";
-import {
-  useDimensions,
-  useDeviceOrientation,
-} from "@react-native-community/hooks";
-
 import { MaterialIcons } from "@expo/vector-icons";
 import "react-native-gesture-handler";
 import HelloScreen from "./Components/HelloScreen";
@@ -30,11 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { BmrCalculator } from "./Components/BmrCalculator";
 import NutritionTableNavigator from "./Components/NutritionMenu/NutritionTableNavigator";
-import AllMenus from "./Components/NutritionMenu/AllMenus";
 import { ThemeProvider } from "styled-components/native";
 import { ToastProvider } from "react-native-styled-toast";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { localStorageKeys } from "./Utils/Definitions";
 
 const Drawer = createDrawerNavigator();
 const theme = {
@@ -50,9 +23,6 @@ const theme = {
   },
 };
 export default function App() {
-  AsyncStorage.getItem(localStorageKeys.USER_MENUS).then((resp) =>
-    console.log("APP.js FROM storage : ", resp)
-  );
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>
