@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { menusObject } from "../../Utils/menusJson";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListItem, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { localStorageKeys } from "../../Utils/Definitions";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AllMenus() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +25,7 @@ export default function AllMenus() {
   const navigation = useNavigation();
   // make this show name of menus from localstorage!!!!!!!!!!!!!!!
   return (
-    <View>
+    <ScrollView>
       {isLoading ? (
         <Text>Loading...</Text>
       ) : userMenus.userMenus.length !== 0 ? (
@@ -45,7 +46,7 @@ export default function AllMenus() {
       ) : (
         <Text style={styles.textStyle}>You're don't have menu yet</Text>
       )}
-    </View>
+    </ScrollView>
   );
 }
 

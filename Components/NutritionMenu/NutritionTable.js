@@ -15,6 +15,8 @@ import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { localStorageKeys } from "../../Utils/Definitions";
+import { useToast } from "react-native-styled-toast";
+import { useNavigation } from "@react-navigation/native";
 
 const addMenuToLocalStorage = (userMenus, menuObject) => {
   userMenus.userMenus.push(menuObject);
@@ -23,7 +25,8 @@ const addMenuToLocalStorage = (userMenus, menuObject) => {
 
 export const NutritionTable = ({ route, navigation }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
-  var userMenus;
+  const { toast } = useToast();
+  var userMenus = null;
   AsyncStorage.getItem(localStorageKeys.USER_MENUS).then((userMenusStorage) => {
     if (userMenusStorage !== null) {
       userMenus = JSON.parse(userMenusStorage);
@@ -32,11 +35,11 @@ export const NutritionTable = ({ route, navigation }) => {
 
   var menuObject;
   const isNowCreated = route.params.isNowCreated;
-  //get it from Menus Component
+  //Get it from Menus Component
   if (!isNowCreated) {
     menuObject = route.params;
   } else {
-    //if is from process of creating menu
+    //If is from process of creating menu
     menuObject = menuState;
   }
 
@@ -71,6 +74,15 @@ export const NutritionTable = ({ route, navigation }) => {
         style={styles.button}
         onPress={() => {
           addMenuToLocalStorage(userMenus, menuObject);
+          toast({
+            message: "Menu save successfully",
+            iconFamily: "FontAwesome",
+            iconName: "check-circle",
+          });
+
+          setTimeout(() => {
+            navigation.navigate("AllMenus");
+          }, 2000);
         }}
       >
         <Text style={{ color: "white", fontWeight: "bold" }}> Save </Text>

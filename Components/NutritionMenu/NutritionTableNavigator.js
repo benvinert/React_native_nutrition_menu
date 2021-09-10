@@ -27,6 +27,8 @@ const menuReducer = (state, action) => {
       return;
     case "SAVE_NAME_MENU":
       return { ...state, nameOfMenu: action.param };
+    case "CLEAR_AFTER_SAVE":
+      return INIT_STATE_OF_MENU;
     default:
       return state;
   }

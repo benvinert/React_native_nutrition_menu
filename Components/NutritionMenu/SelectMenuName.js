@@ -18,12 +18,14 @@ export default function SelectMenuName() {
         onChangeText={(value) => {
           setNameOfMenu(value);
         }}
+        value={nameofMenu}
       />
       <Button
         title="Save"
         onPress={() => {
           if (nameofMenu.length >= 3) {
             menuDispatch({ execute: "SAVE_NAME_MENU", param: nameofMenu });
+            setNameOfMenu("");
             navigation.navigate("NutritionTable", {
               isNowCreated: true,
               nameOfMenu: nameofMenu,
