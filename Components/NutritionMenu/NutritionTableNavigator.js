@@ -1,12 +1,6 @@
 import React, { useState, useReducer } from "react";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableHighlight,
-  FlatList,
-} from "react-native";
+import { StyleSheet } from "react-native";
 import { AutoComplete } from "./SearchFood";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
