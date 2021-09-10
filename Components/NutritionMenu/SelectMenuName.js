@@ -27,7 +27,7 @@ export default function SelectMenuName() {
             menuDispatch({ execute: "SAVE_NAME_MENU", param: nameofMenu });
             setNameOfMenu("");
             navigation.navigate("NutritionTable", {
-              isNowCreated: true,
+              isEditable: true,
               nameOfMenu: nameofMenu,
             });
           } else {

@@ -34,9 +34,9 @@ export const NutritionTable = ({ route, navigation }) => {
   });
 
   var menuObject;
-  const editAble = route.params.editAble;
+  const isEditable = route.params.isEditable;
   //Get it from Menus Component
-  if (!editAble) {
+  if (!isEditable) {
     menuObject = route.params;
   } else {
     //If is from process of creating menu
@@ -90,7 +90,7 @@ export const NutritionTable = ({ route, navigation }) => {
           />
         </View>
       </TableView>
-      {editAble ? <SaveButton /> : null}
+      {isEditable ? <SaveButton /> : null}
     </SafeAreaView>
   );
 };
