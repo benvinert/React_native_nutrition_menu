@@ -8,6 +8,7 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
@@ -25,7 +26,8 @@ export const NutritionTable = ({ route, navigation }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
   const { toast } = useToast();
   var menuObject;
-  var userMenus = null;
+  var userMenus = { userMenus: [] };
+  // need to move it to another function -V-V-V
   //we get localStorage Because on "NutritionTable" component we Edit/Add menus so we need to get the current state of local storage.
   AsyncStorage.getItem(localStorageKeys.USER_MENUS).then((userMenusStorage) => {
     if (userMenusStorage !== null) {
@@ -79,7 +81,7 @@ export const NutritionTable = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScrollView>
       {!isEditable ? <EditButton /> : null}
       <TableView style={styles.tableView}>
         <View>
@@ -111,7 +113,7 @@ export const NutritionTable = ({ route, navigation }) => {
         </View>
       </TableView>
       {isEditable ? <SaveButton /> : null}
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
