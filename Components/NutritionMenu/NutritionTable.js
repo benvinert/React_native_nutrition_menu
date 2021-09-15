@@ -18,6 +18,7 @@ import { useToast } from "react-native-styled-toast";
 import NutritionValues from "./NutritionValues";
 import { calculateMealMacros } from "../Utils/NutritionTableUtils";
 import { INIT_STATE_OF_MACROS } from "../Utils/InitStates";
+import MacrosPieChart from "./MacrosPieChart";
 
 const addMenuToLocalStorage = (userMenus, menuObject) => {
   console.log(userMenus);
@@ -43,7 +44,7 @@ export const NutritionTable = ({ route, navigation }) => {
   if (!isEditable) {
     menuObject = route.params;
   } else {
-    //If is from process of creating menu
+    //If is NOW creating menu
     menuObject = menuState;
   }
 
@@ -130,6 +131,7 @@ export const NutritionTable = ({ route, navigation }) => {
       {isEditable ? <SaveButton /> : null}
       <View>
         <Text>Sum of Macros menu</Text>
+        <MacrosPieChart nutritionValues={sumOfMenuMacros} />
       </View>
     </ScrollView>
   );

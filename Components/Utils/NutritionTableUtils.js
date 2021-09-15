@@ -9,6 +9,7 @@ export const calculateMealMacros = (eachMeal) => {
     mealMacros.PROTEIN += eachFood.PROTEIN;
     mealMacros.FIBER += eachFood.FIBER;
     mealMacros.COLLESTEROL += eachFood.COLLESTEROL;
+    mealMacros.FAT += eachFood.FAT;
   });
   return mealMacros;
 };

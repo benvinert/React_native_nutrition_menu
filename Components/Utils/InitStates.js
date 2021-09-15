@@ -22,4 +22,5 @@ export const INIT_STATE_OF_MACROS = {
   FIBER: 0,
   COLLESTEROL: 0,
   PROTEIN: 0,
+  FAT: 0,
 };
