@@ -13,8 +13,11 @@ import {
 import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { localStorageKeys } from "../../Utils/Definitions";
+import { localStorageKeys } from "../Utils/Definitions";
 import { useToast } from "react-native-styled-toast";
+import NutritionValues from "./NutritionValues";
+import { calculateMealMacros } from "../Utils/NutritionTableUtils";
+import { INIT_STATE_OF_MACROS } from "../Utils/InitStates";
 
 const addMenuToLocalStorage = (userMenus, menuObject) => {
   console.log(userMenus);
@@ -25,6 +28,7 @@ const addMenuToLocalStorage = (userMenus, menuObject) => {
 export const NutritionTable = ({ route, navigation }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
   const { toast } = useToast();
+  let sumOfMenuMacros = { ...INIT_STATE_OF_MACROS };
   var menuObject;
   var userMenus = { userMenus: [] };
   // need to move it to another function -V-V-V
@@ -43,6 +47,17 @@ export const NutritionTable = ({ route, navigation }) => {
     menuObject = menuState;
   }
 
+  console.log("menu object", menuObject);
+  menuObject.menu.map((eachMeal) => {
+    if (eachMeal.foods.length > 0) {
+      let macrosMeal = calculateMealMacros(eachMeal);
+      Object.keys(macrosMeal).forEach((eachMacroProperty) => {
+        sumOfMenuMacros[eachMacroProperty] =
+          macrosMeal[eachMacroProperty] + sumOfMenuMacros[eachMacroProperty];
+      });
+    }
+  });
+  console.log("SUMOFMACROSSS:::", sumOfMenuMacros);
   const SaveButton = () => (
     <TouchableOpacity
       style={styles.button}
@@ -113,6 +128,9 @@ export const NutritionTable = ({ route, navigation }) => {
         </View>
       </TableView>
       {isEditable ? <SaveButton /> : null}
+      <View>
+        <Text>Sum of Macros menu</Text>
+      </View>
     </ScrollView>
   );
 };

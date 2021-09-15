@@ -10,42 +10,46 @@ import {
 import { PieChart, ProgressChart } from "react-native-chart-kit";
 import { Divider } from "react-native-elements";
 
-export default function ValuesOfFood({ valuesOfFood, route, navigation }) {
+export default function NutritionValues({
+  nutritionValues,
+  route,
+  navigation,
+}) {
   if (route != null && route != undefined) {
-    valuesOfFood = route.params.item;
+    nutritionValues = route.params.item;
   }
   const data = [
     {
       name: "Protein",
-      amount: valuesOfFood.PROTEIN / 100,
+      amount: nutritionValues.PROTEIN / 100,
       color: "#E27D60",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Carbs",
-      amount: valuesOfFood.CARBS / 100,
+      amount: nutritionValues.CARBS / 100,
       color: "#8D8741",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Collesterol",
-      amount: valuesOfFood.COLLESTEROL / 100,
+      amount: nutritionValues.COLLESTEROL / 100,
       color: "#F64C72",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Fat",
-      amount: valuesOfFood.FAT / 100,
+      amount: nutritionValues.FAT / 100,
       color: "#41B3A3",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
     },
     {
       name: "Fiber",
-      amount: valuesOfFood.FIBER / 100,
+      amount: nutritionValues.FIBER / 100,
       color: "#C38D9E",
       legendFontColor: "#7F7F7F",
       legendFontSize: 15,
@@ -53,8 +57,8 @@ export default function ValuesOfFood({ valuesOfFood, route, navigation }) {
   ];
 
   useEffect(() => {
-    console.log(valuesOfFood);
-  }, [valuesOfFood]);
+    console.log(nutritionValues);
+  }, [nutritionValues]);
 
   const chartConfig = {
     decimalPlaces: 2, // optional, defaults to 2dp
@@ -79,34 +83,34 @@ export default function ValuesOfFood({ valuesOfFood, route, navigation }) {
         Values of food
       </Text>
       <Text style={{ textAlign: "center", fontSize: 22 }}>
-        {valuesOfFood.name}
+        {nutritionValues.name}
       </Text>
       <Text style={{ textAlign: "center", fontSize: 22 }}>
-        Serving size : {valuesOfFood.grams}g
+        Serving size : {nutritionValues.grams}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", fontSize: 22 }}>
-        Calories : {valuesOfFood.CALORIES}g
+        Calories : {nutritionValues.CALORIES}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#E27D60", fontSize: 22 }}>
-        Protein : {valuesOfFood.PROTEIN}g
+        Protein : {nutritionValues.PROTEIN}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#8D8741", fontSize: 22 }}>
-        Carbs : {valuesOfFood.CARBS}g
+        Carbs : {nutritionValues.CARBS}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#F64C72", fontSize: 22 }}>
-        Collesterol : {valuesOfFood.COLLESTEROL}g
+        Collesterol : {nutritionValues.COLLESTEROL}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#41B3A3", fontSize: 22 }}>
-        Fat : {valuesOfFood.FAT}g
+        Fat : {nutritionValues.FAT}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#C38D9E", fontSize: 22 }}>
-        Fiber : {valuesOfFood.FIBER}g
+        Fiber : {nutritionValues.FIBER}g
       </Text>
       <PieChart
         data={data}

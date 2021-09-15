@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { menusObject } from "../../Utils/menusJson";
+import { menusObject } from "../Utils/menusJson";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListItem, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { localStorageKeys } from "../../Utils/Definitions";
+import { localStorageKeys } from "../Utils/Definitions";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AllMenus() {

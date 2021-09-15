@@ -14,8 +14,8 @@ import { createMenuContext } from "./Context/createMenuContext";
 import { NutritionTable } from "./NutritionTable";
 import AllMenus from "./AllMenus";
 import SelectMenuName from "./SelectMenuName";
-import ValuesOfFood from "./ValuesOfFood";
-import { INIT_STATE_OF_MENU } from "./initStateOfMenu";
+import { INIT_STATE_OF_MENU } from "../Utils/InitStates";
+import NutritionValues from "./NutritionValues";
 
 const menuReducer = (state, action) => {
   switch (action.execute) {
@@ -51,7 +51,7 @@ export default function NutritionTableNavigator({ route, navigation }) {
         />
         <Stack.Screen name="Select name of menu" component={SelectMenuName} />
         <Stack.Screen name="Add food" component={AutoComplete} />
-        <Stack.Screen name="Values of food" component={ValuesOfFood} />
+        <Stack.Screen name="Values of food" component={NutritionValues} />
       </Stack.Navigator>
     </createMenuContext.Provider>
   );

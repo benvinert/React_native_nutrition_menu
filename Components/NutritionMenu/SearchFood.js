@@ -1,10 +1,10 @@
 import React, { useState, useMemo, useContext } from "react";
 import Autocomplete from "react-native-autocomplete-input";
 import { StyleSheet, View, StatusBar, AsyncStorageStatic } from "react-native";
-import { metafoods } from "../../Utils/metafoods";
+import { metafoods } from "../Utils/metafoods";
 import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
-import ValuesOfFood from "./ValuesOfFood";
-import { serverPath, getFood } from "../../Utils/EndPoints";
+import NutritionValues from "./NutritionValues";
+import { serverPath, getFood } from "../Utils/EndPoints";
 import { createMenuContext } from "./Context/createMenuContext";
 import { Tooltip, Text } from "react-native-elements";
 import { useToast } from "react-native-styled-toast";
@@ -99,7 +99,7 @@ export const AutoComplete = ({ route }) => {
         onPress={() => addCurrentFoodToMenu()}
       />
       <View style={{ color: "#668", fontSize: 13 }}>
-        {showValues && <ValuesOfFood valuesOfFood={valuesOfFood} />}
+        {showValues && <NutritionValues nutritionValues={valuesOfFood} />}
       </View>
     </ScrollView>
   );
