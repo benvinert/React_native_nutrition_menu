@@ -1,15 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CellVariant, HeaderSection } from "./NutritionTableStyleSheet";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
-import {
-  StyleSheet,
-  View,
-  Button,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, Button, Text, ScrollView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,6 +11,9 @@ import NutritionValues from "./NutritionValues";
 import { calculateMealMacros } from "../Utils/NutritionTableUtils";
 import { INIT_STATE_OF_MACROS } from "../Utils/InitStates";
 import MacrosPieChart from "./MacrosPieChart";
+import SaveButton from "./Buttons/SaveButton";
+import TouchableOpacityButton from "./Buttons/TouchableOpacityButton";
+import { clickSaveMenu } from "./NutritionTableService";
 
 const addMenuToLocalStorage = (userMenus, menuObject) => {
   console.log(userMenus);
@@ -28,7 +23,6 @@ const addMenuToLocalStorage = (userMenus, menuObject) => {
 
 export const NutritionTable = ({ route, navigation }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
-  const { toast } = useToast();
   let sumOfMenuMacros = { ...INIT_STATE_OF_MACROS };
   var menuObject;
   var userMenus = { userMenus: [] };
@@ -59,25 +53,6 @@ export const NutritionTable = ({ route, navigation }) => {
     }
   });
   console.log("SUMOFMACROSSS:::", sumOfMenuMacros);
-  const SaveButton = () => (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => {
-        addMenuToLocalStorage(userMenus, menuObject);
-        toast({
-          message: "Menu save successfully",
-          iconFamily: "FontAwesome",
-          iconName: "check-circle",
-        });
-        menuDispatch({ execute: "CLEAR_AFTER_SAVE_MENU" });
-        setTimeout(() => {
-          navigation.navigate("AllMenus");
-        }, 2000);
-      }}
-    >
-      <Text style={{ color: "white", fontWeight: "bold" }}> Save </Text>
-    </TouchableOpacity>
-  );
 
   const EditButton = () => {
     return (
@@ -128,10 +103,17 @@ export const NutritionTable = ({ route, navigation }) => {
           />
         </View>
       </TableView>
-      {isEditable ? <SaveButton /> : null}
+      {isEditable ? (
+        <TouchableOpacityButton
+          onPress={() => clickSaveMenu(userMenus, menuObject, menuDispatch)}
+          text="Save"
+        />
+      ) : null}
       <View>
         <Text>Sum of Macros menu</Text>
-        <MacrosPieChart nutritionValues={sumOfMenuMacros} />
+        {sumOfMenuMacros.CALORIES > 0 ? (
+          <MacrosPieChart nutritionValues={sumOfMenuMacros} />
+        ) : null}
       </View>
     </ScrollView>
   );
@@ -140,11 +122,5 @@ export const NutritionTable = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   tableView: {
     marginTop: 5,
-  },
-  button: {
-    alignItems: "center",
-    padding: 10,
-    color: "white",
-    backgroundColor: "#86C232",
   },
 });

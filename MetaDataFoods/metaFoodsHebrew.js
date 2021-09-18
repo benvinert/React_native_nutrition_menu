@@ -1,4 +1,4 @@
-export const metafoods = [
+export const metaFoodsHebrew = [
   { id: "1", title: "אבוקדו" },
   { id: "2", title: "אבוקדו עם קליפה וגרעין" },
   { id: "3", title: "אבטיח ללא קליפה" },
