@@ -5,14 +5,13 @@ import { StyleSheet, View, Button, Text, ScrollView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { localStorageKeys } from "../Utils/Definitions";
+import { localStorageKeys } from "../../Constants/Definitions";
 import { useToast } from "react-native-styled-toast";
 import NutritionValues from "./NutritionValues";
-import { calculateMealMacros } from "../Utils/NutritionTableUtils";
-import { INIT_STATE_OF_MACROS } from "../Utils/InitStates";
-import MacrosPieChart from "./MacrosPieChart";
-import SaveButton from "./Buttons/SaveButton";
-import TouchableOpacityButton from "./Buttons/TouchableOpacityButton";
+import { calculateMealMacros } from "../../Utils/NutritionTableUtils";
+import { INIT_STATE_OF_MACROS } from "../../Constants/InitStates";
+import MacrosPieChart from "../MacrosPieChart/MacrosPieChart";
+import TouchableOpacityButton from "../Buttons/TouchableOpacityButton";
 import { clickSaveMenu } from "./NutritionTableService";
 
 const addMenuToLocalStorage = (userMenus, menuObject) => {

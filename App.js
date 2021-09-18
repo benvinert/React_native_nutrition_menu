@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import "react-native-gesture-handler";
-import Home from "./Pages/Home/Home";
+import Home from "./src/Pages/Home/Home";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { BmrCalculator } from "./Pages/BMRCalculator/BmrCalculator";
-import NutritionTableNavigator from "./Components/NutritionMenu/NutritionTableNavigator";
+import { BmrCalculator } from "./src/Pages/BMRCalculator/BmrCalculator";
+import NutritionTableNavigator from "./src/Components/NutritionMenu/NutritionTableNavigator";
 import { ThemeProvider } from "styled-components/native";
 import { ToastProvider } from "react-native-styled-toast";
 

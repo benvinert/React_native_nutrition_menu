@@ -7,14 +7,14 @@ import {
   TouchableHighlight,
   FlatList,
 } from "react-native";
-import { AutoComplete } from "./SearchFood";
+import { AutoComplete } from "../SearchFood/SearchFood";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { createMenuContext } from "./Context/createMenuContext";
 import { NutritionTable } from "./NutritionTable";
-import AllMenus from "./AllMenus";
+import AllMenus from "../../Pages/AllMenus/AllMenus";
 import SelectMenuName from "./SelectMenuName";
-import { INIT_STATE_OF_MENU } from "../Utils/InitStates";
+import { INIT_STATE_OF_MENU } from "../../Constants/InitStates";
 import NutritionValues from "./NutritionValues";
 
 const menuReducer = (state, action) => {
