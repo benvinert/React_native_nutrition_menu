@@ -1,24 +1,19 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import { localStorageKeys } from "../../Constants/Definitions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 
-export const clickSaveMenu = ({ userMenus, menuObject, menuDispatch }) => {
-  {
-    addMenuToLocalStorage(userMenus, menuObject);
-    toast({
-      message: "Menu save successfully",
-      iconFamily: "FontAwesome",
-      iconName: "check-circle",
-    });
-    menuDispatch({ execute: "CLEAR_AFTER_SAVE_MENU" });
-    setTimeout(() => {
-      navigation.navigate("AllMenus");
-    }, 2000);
-  }
+export const clickSaveMenu = (userMenus, menuObject, menuDispatch, toast) => {
+  addMenuToLocalStorage(userMenus, menuObject);
+  toast({
+    message: "Menu save successfully",
+    iconFamily: "FontAwesome",
+    iconName: "check-circle",
+  });
+  menuDispatch({ execute: "CLEAR_AFTER_SAVE_MENU" });
 };
 
 export const addMenuToLocalStorage = (userMenus, menuObject) => {
-  console.log(userMenus);
   userMenus.userMenus.push(menuObject);
   AsyncStorage.setItem(localStorageKeys.USER_MENUS, JSON.stringify(userMenus));
 };

@@ -47,6 +47,7 @@ export const AutoComplete = ({ route }) => {
     await fetch(`${serverPath}${getFood.getFoodById}${food.id}`)
       .then((response) => response.json())
       .then((jsonResponse) => {
+        console.log("GETFOOOODDDD");
         setValuesOfFood({
           ...jsonResponse,
           foodFromRequest: { ...jsonResponse }, //with that original object we calculate serving size(150g,200g,250g)
@@ -54,7 +55,8 @@ export const AutoComplete = ({ route }) => {
           grams: 100,
         });
         setShowValues(true);
-      });
+      })
+      .catch((e) => console.log("api request failed!"));
   };
 
   return (

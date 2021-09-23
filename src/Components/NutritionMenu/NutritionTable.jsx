@@ -14,13 +14,9 @@ import MacrosPieChart from "../MacrosPieChart/MacrosPieChart";
 import TouchableOpacityButton from "../Buttons/TouchableOpacityButton";
 import { clickSaveMenu } from "./NutritionTableService";
 
-const addMenuToLocalStorage = (userMenus, menuObject) => {
-  console.log(userMenus);
-  userMenus.userMenus.push(menuObject);
-  AsyncStorage.setItem(localStorageKeys.USER_MENUS, JSON.stringify(userMenus));
-};
-
 export const NutritionTable = ({ route, navigation }) => {
+  const { toast } = useToast();
+
   const { menuState, menuDispatch } = useContext(createMenuContext);
   let sumOfMenuMacros = { ...INIT_STATE_OF_MACROS };
   var menuObject;
@@ -104,14 +100,19 @@ export const NutritionTable = ({ route, navigation }) => {
       </TableView>
       {isEditable ? (
         <TouchableOpacityButton
-          onPress={() => clickSaveMenu(userMenus, menuObject, menuDispatch)}
+          onPress={() => {
+            clickSaveMenu(userMenus, menuObject, menuDispatch, toast);
+            setTimeout(() => {
+              navigation.navigate("AllMenus");
+            }, 2000);
+          }}
           text="Save"
         />
       ) : null}
       <View>
         <Text>Sum of Macros menu</Text>
         {sumOfMenuMacros.CALORIES > 0 ? (
-          <MacrosPieChart nutritionValues={sumOfMenuMacros} />
+          <NutritionValues nutritionValues={sumOfMenuMacros} />
         ) : null}
       </View>
     </ScrollView>

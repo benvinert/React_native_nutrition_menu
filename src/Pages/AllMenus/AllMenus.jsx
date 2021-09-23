@@ -20,6 +20,7 @@ export default function AllMenus() {
       }
     );
   }, []);
+  console.log(userMenus);
 
   const navigation = useNavigation();
   // make this show name of menus from localstorage!!!!!!!!!!!!!!!
@@ -27,7 +28,7 @@ export default function AllMenus() {
     <ScrollView>
       {isLoading ? (
         <Text>Loading...</Text>
-      ) : userMenus.userMenus.length !== 0 ? (
+      ) : userMenus.length !== 0 ? (
         userMenus.userMenus.map((eachMenu, index) => (
           <ListItem
             key={index}
