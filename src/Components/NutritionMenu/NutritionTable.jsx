@@ -8,20 +8,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { localStorageKeys } from "../../Constants/Definitions";
 import { useToast } from "react-native-styled-toast";
 import NutritionValues from "./NutritionValues";
-import { calculateMealMacros } from "../../Utils/NutritionTableUtils";
-import { INIT_STATE_OF_MACROS } from "../../Constants/InitStates";
-import MacrosPieChart from "../MacrosPieChart/MacrosPieChart";
+import { calculatMenuMacros } from "../../Utils/NutritionTableUtils";
 import TouchableOpacityButton from "../Buttons/TouchableOpacityButton";
-import { clickSaveMenu } from "./NutritionTableService";
+import {
+  clickSaveMenu,
+  uploadMenuToContextState,
+} from "./NutritionTableService";
 
 export const NutritionTable = ({ route, navigation }) => {
   const { toast } = useToast();
-
   const { menuState, menuDispatch } = useContext(createMenuContext);
-  let sumOfMenuMacros = { ...INIT_STATE_OF_MACROS };
   var menuObject;
   var userMenus = { userMenus: [] };
-  // need to move it to another function -V-V-V
   //we get localStorage Because on "NutritionTable" component we Edit/Add menus so we need to get the current state of local storage.
   AsyncStorage.getItem(localStorageKeys.USER_MENUS).then((userMenusStorage) => {
     if (userMenusStorage !== null) {
@@ -33,42 +31,28 @@ export const NutritionTable = ({ route, navigation }) => {
   if (!isEditable) {
     menuObject = route.params;
   } else {
-    //If is NOW creating menu
+    //If is NOW creating/Edit menu
     menuObject = menuState;
   }
-
-  console.log("menu object", menuObject);
-  menuObject.menu.map((eachMeal) => {
-    if (eachMeal.foods.length > 0) {
-      let macrosMeal = calculateMealMacros(eachMeal);
-      Object.keys(macrosMeal).forEach((eachMacroProperty) => {
-        sumOfMenuMacros[eachMacroProperty] =
-          macrosMeal[eachMacroProperty] + sumOfMenuMacros[eachMacroProperty];
-      });
-    }
-  });
-  console.log("SUMOFMACROSSS:::", sumOfMenuMacros);
-
-  const EditButton = () => {
-    return (
-      <View>
-        <Button
-          title="Edit menu"
+  //TODO When save menu save NOT DUPLICATE!!!
+  const sumOfMenuMacros = calculatMenuMacros(menuObject);
+  return (
+    <ScrollView>
+      {!isEditable ? (
+        <TouchableOpacityButton
+          buttonStyles={{
+            alignItems: "center",
+            padding: 10,
+            color: "blue",
+            backgroundColor: "#5B00BC",
+          }}
+          text="Edit menu"
           onPress={() => {
-            menuDispatch({
-              execute: "PUT_MENU_TO_EDIT",
-              param: { menuToEdit: menuObject },
-            });
+            uploadMenuToContextState(menuDispatch, menuObject);
             setIsEditable(true);
           }}
         />
-      </View>
-    );
-  };
-
-  return (
-    <ScrollView>
-      {!isEditable ? <EditButton /> : null}
+      ) : null}
       <TableView style={styles.tableView}>
         <View>
           <FlatList
