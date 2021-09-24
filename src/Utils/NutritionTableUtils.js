@@ -13,3 +13,17 @@ export const calculateMealMacros = (eachMeal) => {
   });
   return mealMacros;
 };
+
+export const calculatMenuMacros = (menuObject) => {
+  const sumOfMenuMacros = { ...INIT_STATE_OF_MACROS };
+  menuObject.menu.map((eachMeal) => {
+    if (eachMeal.foods.length > 0) {
+      let macrosMeal = calculateMealMacros(eachMeal);
+      Object.keys(macrosMeal).forEach((eachMacroProperty) => {
+        sumOfMenuMacros[eachMacroProperty] =
+          macrosMeal[eachMacroProperty] + sumOfMenuMacros[eachMacroProperty];
+      });
+    }
+  });
+  return sumOfMenuMacros;
+};

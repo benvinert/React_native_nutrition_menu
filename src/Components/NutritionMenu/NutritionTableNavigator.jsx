@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { createMenuContext } from "./Context/createMenuContext";
 import { NutritionTable } from "./NutritionTable";
 import AllMenus from "../../Pages/AllMenus/AllMenus";
-import SelectMenuName from "./SelectMenuName";
+import SelectMenuName from "../../Pages/CreateMenu/SelectMenuName";
 import { INIT_STATE_OF_MENU } from "../../Constants/InitStates";
 import NutritionValues from "./NutritionValues";
 

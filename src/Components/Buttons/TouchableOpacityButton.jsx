@@ -1,12 +1,13 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-export default function TouchableOpacityButton({
+export default TouchableOpacityButton = ({
   text,
   onPress,
   buttonStyles,
   textStyles,
-}) {
+}) => {
+  console.log("BBBB", buttonStyles);
   if (buttonStyles == null || buttonStyles == undefined) {
     buttonStyles = {
       alignItems: "center",
@@ -30,4 +31,4 @@ export default function TouchableOpacityButton({
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
-}
+};

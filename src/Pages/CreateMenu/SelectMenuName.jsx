@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { View, Text } from "react-native";
 import { Input, Button } from "react-native-elements";
-import { createMenuContext } from "./Context/createMenuContext";
+import { createMenuContext } from "../../Components/NutritionMenu/Context/createMenuContext";
 import { useNavigation } from "@react-navigation/native";
 import { useToast } from "react-native-styled-toast";
 
