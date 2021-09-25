@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListItem, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { localStorageKeys } from "../../Constants/Definitions";
-import { SafeAreaView } from "react-native-safe-area-context";
-
+import { calculatMenuMacros } from "../../Utils/NutritionTableUtils";
 export default function AllMenus() {
   const [isLoading, setIsLoading] = useState(true);
   const [userMenus, setUserMenus] = useState({ userMenus: [] });
-
+  const navigation = useNavigation();
   useEffect(() => {
     AsyncStorage.getItem(localStorageKeys.USER_MENUS).then(
       (userMenusFromStorage) => {
@@ -21,8 +20,6 @@ export default function AllMenus() {
     );
   }, []);
   console.log(userMenus);
-
-  const navigation = useNavigation();
   // make this show name of menus from localstorage!!!!!!!!!!!!!!!
   return (
     <ScrollView>
@@ -34,12 +31,17 @@ export default function AllMenus() {
             key={index}
             bottomDivider
             onPress={() => {
-              navigation.navigate("NutritionTable", userMenus.userMenus[index]);
+              navigation.navigate("NutritionTable", {
+                menu: userMenus.userMenus[index],
+                indexOfMenu: index,
+              });
             }}
           >
             <ListItem.Content>
               <ListItem.Title>{eachMenu.nameOfMenu}</ListItem.Title>
-              <ListItem.Subtitle>Subtitle</ListItem.Subtitle>
+              <ListItem.Subtitle>
+                Calories : {calculatMenuMacros(eachMenu).CALORIES}
+              </ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         ))

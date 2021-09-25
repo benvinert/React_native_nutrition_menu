@@ -101,7 +101,12 @@ export const AutoComplete = ({ route }) => {
         onPress={() => addCurrentFoodToMenu()}
       />
       <View style={{ color: "#668", fontSize: 13 }}>
-        {showValues && <NutritionValues nutritionValues={valuesOfFood} />}
+        {showValues && (
+          <NutritionValues
+            nutritionValues={valuesOfFood}
+            title={"Values of food"}
+          />
+        )}
       </View>
     </ScrollView>
   );

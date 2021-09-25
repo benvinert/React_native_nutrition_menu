@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { CellVariant, HeaderSection } from "./NutritionTableStyleSheet";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
 import { StyleSheet, View, Button, Text, ScrollView } from "react-native";
@@ -15,21 +15,25 @@ import {
   uploadMenuToContextState,
 } from "./NutritionTableService";
 
+//That Component uses on 2 pages 1-> AllMenus 2-> Create new menu
 export const NutritionTable = ({ route, navigation }) => {
   const { toast } = useToast();
   const { menuState, menuDispatch } = useContext(createMenuContext);
   var menuObject;
   var userMenus = { userMenus: [] };
+  let indexOfMenu = useRef(null);
   //we get localStorage Because on "NutritionTable" component we Edit/Add menus so we need to get the current state of local storage.
   AsyncStorage.getItem(localStorageKeys.USER_MENUS).then((userMenusStorage) => {
     if (userMenusStorage !== null) {
       userMenus = JSON.parse(userMenusStorage);
     }
   });
-  const [isEditable, setIsEditable] = useState(route.params.isEditable);
+
+  const [isEditable, setIsEditable] = useState(route.params.isEditable); // if isEditable undefined so we came from Menus page
   //Get it from Menus Component
   if (!isEditable) {
-    menuObject = route.params;
+    menuObject = route.params.menu;
+    indexOfMenu.current = route.params.indexOfMenu;
   } else {
     //If is NOW creating/Edit menu
     menuObject = menuState;
@@ -85,7 +89,13 @@ export const NutritionTable = ({ route, navigation }) => {
       {isEditable ? (
         <TouchableOpacityButton
           onPress={() => {
-            clickSaveMenu(userMenus, menuObject, menuDispatch, toast);
+            clickSaveMenu(
+              userMenus,
+              menuObject,
+              menuDispatch,
+              toast,
+              indexOfMenu
+            );
             setTimeout(() => {
               navigation.navigate("AllMenus");
             }, 2000);
@@ -94,9 +104,11 @@ export const NutritionTable = ({ route, navigation }) => {
         />
       ) : null}
       <View>
-        <Text>Sum of Macros menu</Text>
         {sumOfMenuMacros.CALORIES > 0 ? (
-          <NutritionValues nutritionValues={sumOfMenuMacros} />
+          <NutritionValues
+            nutritionValues={sumOfMenuMacros}
+            title={"Sum of Macros menu"}
+          />
         ) : null}
       </View>
     </ScrollView>

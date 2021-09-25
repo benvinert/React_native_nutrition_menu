@@ -19,7 +19,6 @@ export default function MacrosPieChart({ nutritionValues }) {
       stroke: "green",
     },
   };
-  console.log("NUTRITION VALUES::", nutritionValues);
 
   const data = [
     {

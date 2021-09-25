@@ -15,6 +15,7 @@ export default function NutritionValues({
   nutritionValues,
   route,
   navigation,
+  title,
 }) {
   if (route != null && route != undefined) {
     nutritionValues = route.params.item;
@@ -29,37 +30,39 @@ export default function NutritionValues({
           fontSize: 30,
         }}
       >
-        Values of food
+        {title}
       </Text>
       <Text style={{ textAlign: "center", fontSize: 22 }}>
-        {nutritionValues.name}
+        {!!nutritionValues.name ? nutritionValues.name : null}
       </Text>
-      <Text style={{ textAlign: "center", fontSize: 22 }}>
-        Serving size : {nutritionValues.grams}g
-      </Text>
+      {!!nutritionValues.grams ? (
+        <Text style={{ textAlign: "center", fontSize: 22 }}>
+          Serving size : {nutritionValues.grams}g
+        </Text>
+      ) : null}
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", fontSize: 22 }}>
-        Calories : {nutritionValues.CALORIES}g
+        Calories : {nutritionValues.CALORIES.toFixed(2)}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#E27D60", fontSize: 22 }}>
-        Protein : {nutritionValues.PROTEIN}g
+        Protein : {nutritionValues.PROTEIN.toFixed(2)}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#8D8741", fontSize: 22 }}>
-        Carbs : {nutritionValues.CARBS}g
+        Carbs : {nutritionValues.CARBS.toFixed(2)}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#F64C72", fontSize: 22 }}>
-        Collesterol : {nutritionValues.COLLESTEROL}g
+        Collesterol : {nutritionValues.COLLESTEROL.toFixed(2)}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#41B3A3", fontSize: 22 }}>
-        Fat : {nutritionValues.FAT}g
+        Fat : {nutritionValues.FAT.toFixed(2)}g
       </Text>
       <Divider orientation="horizontal" />
       <Text style={{ textAlign: "center", color: "#C38D9E", fontSize: 22 }}>
-        Fiber : {nutritionValues.FIBER}g
+        Fiber : {nutritionValues.FIBER.toFixed(2)}g
       </Text>
       <MacrosPieChart nutritionValues={nutritionValues} />
     </View>
