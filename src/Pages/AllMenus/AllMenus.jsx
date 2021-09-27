@@ -4,7 +4,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListItem, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { localStorageKeys } from "../../Constants/Definitions";
-import { calculatMenuMacros } from "../../Utils/NutritionTableUtils";
+import { calculatMenuMacros } from "../../Components/NutritionMenu/NutritionTableUtils";
+
 export default function AllMenus() {
   const [isLoading, setIsLoading] = useState(true);
   const [userMenus, setUserMenus] = useState({ userMenus: [] });
@@ -18,8 +19,8 @@ export default function AllMenus() {
         }
       }
     );
-  }, []);
-  // make this show name of menus from localstorage!!!!!!!!!!!!!!!
+  }, [userMenus]);
+
   return (
     <ScrollView>
       {isLoading ? (

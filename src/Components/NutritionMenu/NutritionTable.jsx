@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { localStorageKeys } from "../../Constants/Definitions";
 import { useToast } from "react-native-styled-toast";
 import NutritionValues from "./NutritionValues";
-import { calculatMenuMacros } from "../../Utils/NutritionTableUtils";
+import { calculatMenuMacros } from "../NutritionMenu/NutritionTableUtils";
 import TouchableOpacityButton from "../Buttons/TouchableOpacityButton";
 import {
   clickSaveMenu,
