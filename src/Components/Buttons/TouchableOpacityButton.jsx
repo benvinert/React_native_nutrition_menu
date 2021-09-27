@@ -7,7 +7,6 @@ export default TouchableOpacityButton = ({
   buttonStyles,
   textStyles,
 }) => {
-  console.log("BBBB", buttonStyles);
   if (buttonStyles == null || buttonStyles == undefined) {
     buttonStyles = {
       alignItems: "center",

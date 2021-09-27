@@ -20,11 +20,16 @@ import NutritionValues from "./NutritionValues";
 const menuReducer = (state, action) => {
   switch (action.execute) {
     case "ADD_FOOD":
-      var prevMenu = state.menu;
-      prevMenu[action.param.indexOfMeal].foods.push(action.param.valuesOfFood);
-      return { ...state, menu: prevMenu };
+      state.menu[action.param.indexOfMeal].foods.push(
+        action.param.valuesOfFood
+      );
+      return { ...state, menu: state.menu };
     case "REMOVE_FOOD":
-      return;
+      let indexOfMeal = action.param.indexOfMeal;
+      let indexOfFoodToRemove = action.param.indexOfFoodToRemove;
+      console.log(state.menu);
+      state.menu[indexOfMeal].foods.splice(indexOfFoodToRemove, 1);
+      return { ...state };
     case "SAVE_NAME_MENU":
       return { ...state, nameOfMenu: action.param };
     case "PUT_MENU_TO_EDIT":

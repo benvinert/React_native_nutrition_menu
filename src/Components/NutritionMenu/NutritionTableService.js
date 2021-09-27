@@ -34,3 +34,17 @@ export const uploadMenuToContextState = (menuDispatch, menuObject) => {
     param: { menuToEdit: menuObject },
   });
 };
+
+export const removeFoodFromMenu = (
+  indexOfMeal,
+  indexOfFoodToRemove,
+  menuDispatch
+) => {
+  menuDispatch({
+    execute: "REMOVE_FOOD",
+    param: {
+      indexOfMeal: indexOfMeal,
+      indexOfFoodToRemove: indexOfFoodToRemove,
+    },
+  });
+};

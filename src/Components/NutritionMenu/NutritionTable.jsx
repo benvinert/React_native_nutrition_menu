@@ -14,6 +14,7 @@ import {
   clickSaveMenu,
   uploadMenuToContextState,
 } from "./NutritionTableService";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 //That Component uses on 2 pages 1-> AllMenus 2-> Create new menu
 export const NutritionTable = ({ route, navigation }) => {
@@ -77,7 +78,12 @@ export const NutritionTable = ({ route, navigation }) => {
                     data={item.foods}
                     keyExtractor={(food, index) => index.toString()}
                     renderItem={(food) => (
-                      <CellVariant title={food.item.name} foodDetails={food} />
+                      <CellVariant
+                        isEditable={isEditable}
+                        title={food.item.name}
+                        foodDetails={food}
+                        indexOfMeal={index}
+                      />
                     )}
                   />
                 </View>

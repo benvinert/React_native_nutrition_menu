@@ -22,16 +22,18 @@ export default function NutritionValues({
   }
 
   return (
-    <View style={styleSheet.container}>
-      <Text
-        style={{
-          textAlign: "center",
-          fontFamily: "sans-serif-light",
-          fontSize: 30,
-        }}
-      >
-        {title}
-      </Text>
+    <ScrollView style={styleSheet.container}>
+      {!!title ? (
+        <Text
+          style={{
+            textAlign: "center",
+            fontFamily: "sans-serif-light",
+            fontSize: 30,
+          }}
+        >
+          {title}
+        </Text>
+      ) : null}
       <Text style={{ textAlign: "center", fontSize: 22 }}>
         {!!nutritionValues.name ? nutritionValues.name : null}
       </Text>
@@ -65,7 +67,7 @@ export default function NutritionValues({
         Fiber : {nutritionValues.FIBER.toFixed(2)}g
       </Text>
       <MacrosPieChart nutritionValues={nutritionValues} />
-    </View>
+    </ScrollView>
   );
 }
 

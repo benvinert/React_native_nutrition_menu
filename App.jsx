@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
 import "react-native-gesture-handler";
 import Home from "./src/Pages/Home/Home";
 import { NavigationContainer } from "@react-navigation/native";

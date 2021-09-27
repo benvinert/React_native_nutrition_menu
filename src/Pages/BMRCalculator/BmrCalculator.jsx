@@ -8,9 +8,6 @@ export const BmrCalculator = ({ route, navigation }) => {
       backgroundColor: "#ededed",
     },
   });
-
-  console.log(route.params.myname);
-
   return (
     <Formik
       initialValues={{ email: "" }}

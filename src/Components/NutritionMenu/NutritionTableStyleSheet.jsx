@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Text, View, TouchableHighlight, StyleSheet } from "react-native";
 import { Cell } from "react-native-tableview-simple";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { removeFoodFromMenu } from "./NutritionTableService";
+import { createMenuContext } from "../../Components/NutritionMenu/Context/createMenuContext";
 
-export const CellVariant = (props) => {
+export const CellVariant = ({
+  foodDetails,
+  indexOfMeal,
+  title,
+  isEditable,
+}) => {
   const navigation = useNavigation();
+  const { menuState, menuDispatch } = useContext(createMenuContext);
+
   return (
     <Cell
-      onPress={() => navigation.navigate("Values of food", props.foodDetails)}
-      {...props}
+      onPress={() => navigation.navigate("Values of food", foodDetails)}
       cellContentView={
         <View
           style={{
@@ -19,12 +28,36 @@ export const CellVariant = (props) => {
             paddingVertical: 10,
           }}
         >
+          {isEditable ? (
+            <View>
+              <Button
+                title=""
+                icon={
+                  <Icon
+                    name="trash"
+                    iconFamily="FontAwesome"
+                    size={15}
+                    color="white"
+                  />
+                }
+                iconRight
+                onPress={() =>
+                  removeFoodFromMenu(
+                    indexOfMeal,
+                    foodDetails.index,
+                    menuDispatch
+                  )
+                }
+              />
+            </View>
+          ) : null}
+
           <Text
             allowFontScaling
             numberOfLines={1}
             style={{ flex: 1, fontSize: 20 }}
           >
-            {props.title}
+            {title}
           </Text>
         </View>
       }
