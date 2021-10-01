@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ListItem, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { localStorageKeys } from "../../Constants/Definitions";
+import { localStorageKeys } from "../../Constants";
 import { calculatMenuMacros } from "../../Components/NutritionMenu/NutritionTableUtils";
 
 export default function AllMenus() {

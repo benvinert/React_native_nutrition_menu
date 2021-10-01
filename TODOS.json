@@ -15,5 +15,8 @@
         "desc": "client have schedule and he can set part of body he train on each day ,when his rest days etc..."
       }
     }
-  ]
+  ],
+  "LEARNED": {
+    "Cookies": "put via AsyncLocalStorage and set on him expire date and checked it every time."
+  }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { INIT_STATE_OF_MACROS } from "../../Constants/InitStates";
+import { INIT_STATE_OF_MACROS } from "../../Constants";
 
 export const calculateMealMacros = (eachMeal) => {
   const mealMacros = { ...INIT_STATE_OF_MACROS };

@@ -14,7 +14,7 @@ import { createMenuContext } from "./Context/createMenuContext";
 import { NutritionTable } from "./NutritionTable";
 import AllMenus from "../../Pages/AllMenus/AllMenus";
 import SelectMenuName from "../../Pages/CreateMenu/SelectMenuName";
-import { INIT_STATE_OF_MENU } from "../../Constants/InitStates";
+import { INIT_STATE_OF_MENU } from "../../Constants";
 import NutritionValues from "./NutritionValues";
 
 const menuReducer = (state, action) => {

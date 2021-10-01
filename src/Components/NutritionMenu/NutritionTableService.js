@@ -1,5 +1,5 @@
 import React from "react";
-import { localStorageKeys } from "../../Constants/Definitions";
+import { localStorageKeys } from "../../Constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const clickSaveMenu = (

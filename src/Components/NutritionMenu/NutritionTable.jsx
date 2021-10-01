@@ -5,7 +5,7 @@ import { StyleSheet, View, Button, Text, ScrollView } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { localStorageKeys } from "../../Constants/Definitions";
+import { localStorageKeys } from "../../Constants";
 import { useToast } from "react-native-styled-toast";
 import NutritionValues from "./NutritionValues";
 import { calculatMenuMacros } from "../NutritionMenu/NutritionTableUtils";

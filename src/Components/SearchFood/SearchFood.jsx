@@ -4,7 +4,7 @@ import { StyleSheet, View, StatusBar, AsyncStorageStatic } from "react-native";
 import { metaFoodsHebrew } from "../../../MetaDataFoods/metaFoodsHebrew";
 import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
 import NutritionValues from "../NutritionMenu/NutritionValues";
-import { serverPath, getFood } from "../../Constants/EndPoints";
+import { serverPath, getFood } from "../../Constants";
 import { createMenuContext } from "../NutritionMenu/Context/createMenuContext";
 import { Tooltip, Text } from "react-native-elements";
 import { useToast } from "react-native-styled-toast";
