@@ -21,6 +21,15 @@ export default function NutritionValues({
     nutritionValues = route.params.item;
   }
 
+  const nutritionValuesArray = [
+    { title: "Calories", value: nutritionValues.CALORIES.toFixed(2) },
+    { title: "Protein", value: nutritionValues.PROTEIN.toFixed(2) },
+    { title: "Carbs", value: nutritionValues.CARBS.toFixed(2) },
+    { title: "Collesterol", value: nutritionValues.COLLESTEROL.toFixed(2) },
+    { title: "Fat", value: nutritionValues.FAT.toFixed(2) },
+    { title: "Fiber", value: nutritionValues.FIBER.toFixed(2) },
+  ];
+
   return (
     <ScrollView style={styleSheet.container}>
       {!!title ? (
@@ -43,29 +52,15 @@ export default function NutritionValues({
         </Text>
       ) : null}
       <Divider orientation="horizontal" />
-      <Text style={{ textAlign: "center", fontSize: 22 }}>
-        Calories : {nutritionValues.CALORIES.toFixed(2)}g
-      </Text>
-      <Divider orientation="horizontal" />
-      <Text style={{ textAlign: "center", color: "#E27D60", fontSize: 22 }}>
-        Protein : {nutritionValues.PROTEIN.toFixed(2)}g
-      </Text>
-      <Divider orientation="horizontal" />
-      <Text style={{ textAlign: "center", color: "#8D8741", fontSize: 22 }}>
-        Carbs : {nutritionValues.CARBS.toFixed(2)}g
-      </Text>
-      <Divider orientation="horizontal" />
-      <Text style={{ textAlign: "center", color: "#F64C72", fontSize: 22 }}>
-        Collesterol : {nutritionValues.COLLESTEROL.toFixed(2)}g
-      </Text>
-      <Divider orientation="horizontal" />
-      <Text style={{ textAlign: "center", color: "#41B3A3", fontSize: 22 }}>
-        Fat : {nutritionValues.FAT.toFixed(2)}g
-      </Text>
-      <Divider orientation="horizontal" />
-      <Text style={{ textAlign: "center", color: "#C38D9E", fontSize: 22 }}>
-        Fiber : {nutritionValues.FIBER.toFixed(2)}g
-      </Text>
+      {nutritionValuesArray.map((eachMacro) => (
+        <View>
+          <Text style={{ textAlign: "center", fontSize: 22, padding: 5 }}>
+            {eachMacro.title}: {eachMacro.value}g{" "}
+          </Text>
+          <Divider orientation="horizontal" />
+        </View>
+      ))}
+
       <MacrosPieChart nutritionValues={nutritionValues} />
     </ScrollView>
   );

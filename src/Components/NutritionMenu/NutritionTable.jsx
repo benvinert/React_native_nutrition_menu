@@ -113,7 +113,7 @@ export const NutritionTable = ({ route, navigation }) => {
         {sumOfMenuMacros.CALORIES > 0 ? (
           <NutritionValues
             nutritionValues={sumOfMenuMacros}
-            title={"Sum of Macros menu"}
+            title={"Sum of menu macros"}
           />
         ) : null}
       </View>
