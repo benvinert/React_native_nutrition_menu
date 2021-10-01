@@ -7,6 +7,7 @@ import { BmrCalculator } from "./src/Pages/BMRCalculator/BmrCalculator";
 import NutritionTableNavigator from "./src/Components/NutritionMenu/NutritionTableNavigator";
 import { ThemeProvider } from "styled-components/native";
 import { ToastProvider } from "react-native-styled-toast";
+import OnBoarding from "./src/Components/OnBoarding/OnBoarding";
 
 const Drawer = createDrawerNavigator();
 const theme = {
@@ -21,12 +22,18 @@ const theme = {
     info: "#00FFFF",
   },
 };
+
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>
         <NavigationContainer>
           <Drawer.Navigator>
+            <Drawer.Screen
+              name="Tips"
+              component={OnBoarding}
+              initialParams={{ navigateTo: "Tips" }}
+            />
             <Drawer.Screen
               name="Home"
               component={Home}
