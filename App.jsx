@@ -32,7 +32,7 @@ export default function App() {
             <Drawer.Screen
               name="Tips"
               component={OnBoarding}
-              initialParams={{ navigateTo: "Tips" }}
+              initialParams={{ navigateTo: "Tips", fromSideBar: true }}
             />
             <Drawer.Screen
               name="Home"

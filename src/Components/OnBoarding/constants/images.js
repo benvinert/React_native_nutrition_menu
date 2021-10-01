@@ -1,4 +1,4 @@
-export const onboarding1 = require("../../../assets/images/onboarding-1.png");
+export const onboarding1 = require("../../../assets/images/3786803.jpg");
 export const onboarding2 = require("../../../assets/images/onboarding-2.png");
 export const onboarding3 = require("../../../assets/images/onboarding-3.png");
 
