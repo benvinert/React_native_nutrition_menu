@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "react-native-gesture-handler";
 import Home from "./src/Pages/Home/Home";
 import { NavigationContainer } from "@react-navigation/native";
@@ -28,7 +28,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>
         <NavigationContainer>
-          <Drawer.Navigator>
+          <Drawer.Navigator initialRouteName={"Tips"}>
             <Drawer.Screen
               name="Tips"
               component={OnBoarding}

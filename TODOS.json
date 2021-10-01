@@ -6,6 +6,11 @@
       }
     },
     {
+      "dark mode": {
+        "desc": "use redux and styled component to dark mode, create buttons and layouts reusable"
+      }
+    },
+    {
       "reminders": {
         "desc": "client can set him reminders to eat or train or to drink water"
       }

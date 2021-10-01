@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Animated,
   Image,
@@ -11,41 +11,29 @@ import {
 import { useNavigation } from "@react-navigation/native";
 
 // constants
-import { images, theme } from "./constants";
-const { onboarding1, onboarding2, onboarding3 } = images;
+import { theme } from "./constants";
+import { TipsObject } from "./TipsObject";
+import {
+  isBeforeToday,
+  moveToHomeIfUserAlreadySeenTips,
+} from "./OnBoardingUtils";
 
 // theme
 const { COLORS, SIZES } = theme;
 
-const onBoardings = [
-  {
-    title: "Let's Travelling",
-    description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut",
-    img: onboarding1,
-  },
-  {
-    title: "Navigation",
-    description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut",
-    img: onboarding2,
-  },
-  {
-    title: "Destination",
-    description:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut",
-    img: onboarding3,
-  },
-];
-
 const OnBoarding = () => {
-  const [completed, setCompleted] = React.useState(false);
   const navigation = useNavigation();
+  const [completed, setCompleted] = useState(false);
   const scrollX = new Animated.Value(0);
+  const [moveToHome, setMoveToHome] = useState(false);
+  moveToHomeIfUserAlreadySeenTips(setMoveToHome);
+  if (moveToHome) {
+    navigation.navigate("Home");
+  }
 
-  React.useEffect(() => {
+  useEffect(() => {
     scrollX.addListener(({ value }) => {
-      if (Math.floor(value / SIZES.width) === onBoardings.length - 1) {
+      if (Math.floor(value / SIZES.width) === TipsObject.length - 1) {
         setCompleted(true);
       }
     });
@@ -54,7 +42,6 @@ const OnBoarding = () => {
   }, []);
 
   // Render
-
   function renderContent() {
     return (
       <Animated.ScrollView
@@ -70,7 +57,7 @@ const OnBoarding = () => {
           { useNativeDriver: false }
         )}
       >
-        {onBoardings.map((item, index) => (
+        {TipsObject.map((item, index) => (
           <View
             //center
             //bottom
@@ -156,7 +143,7 @@ const OnBoarding = () => {
 
     return (
       <View style={styles.dotsContainer}>
-        {onBoardings.map((item, index) => {
+        {TipsObject.map((item, index) => {
           const opacity = dotPosition.interpolate({
             inputRange: [index - 1, index, index + 1],
             outputRange: [0.3, 1, 0.3],
