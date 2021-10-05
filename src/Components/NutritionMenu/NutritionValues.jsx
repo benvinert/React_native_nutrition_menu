@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -10,6 +10,7 @@ import {
 import { PieChart, ProgressChart } from "react-native-chart-kit";
 import { Divider } from "react-native-elements";
 import MacrosPieChart from "../MacrosPieChart/MacrosPieChart";
+import { themeContext } from "../../ThemeProvider/ThemeManager";
 
 export default function NutritionValues({
   nutritionValues,
@@ -20,6 +21,7 @@ export default function NutritionValues({
   if (route != null && route != undefined) {
     nutritionValues = route.params.item;
   }
+  const { applicationTheme } = useContext(themeContext);
 
   const nutritionValuesArray = [
     { title: "Calories", value: nutritionValues.CALORIES.toFixed(2) },
@@ -38,6 +40,7 @@ export default function NutritionValues({
             textAlign: "center",
             fontFamily: "sans-serif-light",
             fontSize: 30,
+            color: applicationTheme.styles.textColor,
           }}
         >
           {title}
@@ -54,7 +57,14 @@ export default function NutritionValues({
       <Divider orientation="horizontal" />
       {nutritionValuesArray.map((eachMacro) => (
         <View>
-          <Text style={{ textAlign: "center", fontSize: 22, padding: 5 }}>
+          <Text
+            style={{
+              textAlign: "center",
+              color: applicationTheme.styles.textColor,
+              fontSize: 22,
+              padding: 5,
+            }}
+          >
             {eachMacro.title}: {eachMacro.value}g{" "}
           </Text>
           <Divider orientation="horizontal" />

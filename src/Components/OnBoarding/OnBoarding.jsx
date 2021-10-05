@@ -23,16 +23,14 @@ const OnBoarding = ({ route }) => {
   const [completed, setCompleted] = useState(false);
   const scrollX = new Animated.Value(0);
   const [moveToHome, setMoveToHome] = useState(false);
+
   /**
    * If user not clicked on "Tips" on Sidebar ,
    * we will check if he has seen the tips page.
    */
-
-  if (route && !route.params.fromSideBar) {
-    moveToHomeIfUserAlreadySeenTips(setMoveToHome);
-    if (moveToHome) {
-      navigation.navigate("Home");
-    }
+  moveToHomeIfUserAlreadySeenTips(setMoveToHome);
+  if (moveToHome) {
+    navigation.navigate("Home");
   }
 
   useEffect(() => {

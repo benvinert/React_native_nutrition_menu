@@ -15,6 +15,7 @@ import {
   uploadMenuToContextState,
 } from "./NutritionTableService";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { themeContext } from "../../ThemeProvider/ThemeManager";
 
 //That Component uses on 2 pages 1-> AllMenus 2-> Create new menu
 export const NutritionTable = ({ route, navigation }) => {
@@ -41,8 +42,14 @@ export const NutritionTable = ({ route, navigation }) => {
   }
   //TODO When save menu save NOT DUPLICATE!!!
   const sumOfMenuMacros = calculatMenuMacros(menuObject);
+  const { applicationTheme } = useContext(themeContext);
+
   return (
-    <ScrollView>
+    <ScrollView
+      style={{
+        backgroundColor: applicationTheme.styles.background,
+      }}
+    >
       {!isEditable ? (
         <TouchableOpacityButton
           buttonStyles={{

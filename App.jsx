@@ -1,13 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import "react-native-gesture-handler";
 import Home from "./src/Pages/Home/Home";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { BmrCalculator } from "./src/Pages/BMRCalculator/BmrCalculator";
 import NutritionTableNavigator from "./src/Components/NutritionMenu/NutritionTableNavigator";
 import { ThemeProvider } from "styled-components/native";
 import { ToastProvider } from "react-native-styled-toast";
 import OnBoarding from "./src/Components/OnBoarding/OnBoarding";
+import { SafeAreaView } from "react-native";
+import { darkMode, themeContext } from "./src/ThemeProvider/ThemeManager";
+import Settings from "./src/Pages/Settings/Settings";
 
 const Drawer = createDrawerNavigator();
 const theme = {
@@ -24,38 +31,50 @@ const theme = {
 };
 
 export default function App() {
+  const [applicationTheme, setApplicationTheme] = useState(darkMode);
+
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>
-        <NavigationContainer>
-          <Drawer.Navigator initialRouteName={"Tips"}>
-            <Drawer.Screen
-              name="Tips"
-              component={OnBoarding}
-              initialParams={{ navigateTo: "Tips", fromSideBar: true }}
-            />
-            <Drawer.Screen
-              name="Home"
-              component={Home}
-              options={{ title: "Welcome" }}
-            />
-            <Drawer.Screen
-              name="My menus"
-              component={NutritionTableNavigator}
-              initialParams={{ navigateTo: "AllMenus" }}
-            />
-            <Drawer.Screen
-              name="BMR Calculator"
-              initialParams={{ myname: "ben" }}
-              component={BmrCalculator}
-            />
-            <Drawer.Screen
-              name="Create Menu"
-              component={NutritionTableNavigator}
-              initialParams={{ navigateTo: "Select name of menu" }}
-            />
-          </Drawer.Navigator>
-        </NavigationContainer>
+        <themeContext.Provider value={{ applicationTheme }}>
+          <NavigationContainer theme={applicationTheme}>
+            <Drawer.Navigator initialRouteName={"Tips"}>
+              <Drawer.Screen
+                name="Tips"
+                component={OnBoarding}
+                initialParams={{ navigateTo: "Tips" }}
+              />
+              <Drawer.Screen
+                name="Home"
+                component={Home}
+                options={{ title: "Welcome" }}
+              />
+              <Drawer.Screen
+                name="My menus"
+                component={NutritionTableNavigator}
+                initialParams={{ navigateTo: "AllMenus" }}
+              />
+              <Drawer.Screen
+                name="BMR Calculator"
+                initialParams={{ myname: "ben" }}
+                component={BmrCalculator}
+              />
+              <Drawer.Screen
+                name="Create Menu"
+                component={NutritionTableNavigator}
+                initialParams={{ navigateTo: "Select name of menu" }}
+              />
+              <Drawer.Screen
+                name="Settings"
+                component={Settings}
+                initialParams={{
+                  navigateTo: "Settings",
+                  setTheme: setApplicationTheme,
+                }}
+              />
+            </Drawer.Navigator>
+          </NavigationContainer>
+        </themeContext.Provider>
       </ToastProvider>
     </ThemeProvider>
   );

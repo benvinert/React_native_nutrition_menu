@@ -6,6 +6,7 @@ import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { removeFoodFromMenu } from "./NutritionTableService";
 import { createMenuContext } from "../../Components/NutritionMenu/Context/createMenuContext";
+import { themeContext } from "../../ThemeProvider/ThemeManager";
 
 export const CellVariant = ({
   foodDetails,
@@ -15,6 +16,7 @@ export const CellVariant = ({
 }) => {
   const navigation = useNavigation();
   const { menuState, menuDispatch } = useContext(createMenuContext);
+  const { applicationTheme } = useContext(themeContext);
 
   return (
     <Cell
@@ -66,7 +68,17 @@ export const CellVariant = ({
 };
 
 export const HeaderSection = ({ mealTime, indexOfMeal, isEditable }) => {
+  const { applicationTheme } = useContext(themeContext);
   const navigation = useNavigation();
+
+  const styles = StyleSheet.create({
+    mealTimeStyle: {
+      fontSize: 19,
+      paddingLeft: 5,
+      alignSelf: "center",
+      color: applicationTheme.styles.textColor,
+    },
+  });
 
   const AddButton = () => {
     return (
@@ -88,11 +100,3 @@ export const HeaderSection = ({ mealTime, indexOfMeal, isEditable }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  mealTimeStyle: {
-    fontSize: 19,
-    paddingLeft: 5,
-    alignSelf: "center",
-  },
-});

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, Button, SafeAreaView } from "react-native";
+import { themeContext } from "../../ThemeProvider/ThemeManager";
 
 export default function Home() {
+  const { applicationTheme } = useContext(themeContext);
+  console.log(applicationTheme);
   return (
     <SafeAreaView>
       <Button title="heyy" />
