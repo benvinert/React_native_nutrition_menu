@@ -1,10 +1,9 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useState, useMemo, useContext, useRef } from "react";
 import Autocomplete from "react-native-autocomplete-input";
 import { StyleSheet, View, StatusBar, AsyncStorageStatic } from "react-native";
-import { metaFoodsHebrew } from "../../../MetaDataFoods/metaFoodsHebrew";
+import { metaFoodsHebrew, metaFoodsEnglish } from "../../../MetaDataFoods";
 import { AutocompleteDropdown } from "react-native-autocomplete-dropdown";
 import NutritionValues from "../NutritionMenu/NutritionValues";
-import { serverPath, getFood } from "../../Constants";
 import { createMenuContext } from "../NutritionMenu/Context/createMenuContext";
 import { Tooltip, Text } from "react-native-elements";
 import { useToast } from "react-native-styled-toast";
@@ -12,6 +11,8 @@ import { Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import GramsPicker from "../GramsPicker/GramsPicker";
 import { ScrollView } from "react-native-gesture-handler";
+import { themeContext } from "../../ThemeProvider/ThemeManager";
+import { getFoodById } from "./SearchFoodService";
 
 export const AutoComplete = ({ route }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
@@ -20,7 +21,8 @@ export const AutoComplete = ({ route }) => {
   const [showValues, setShowValues] = useState(false);
   const indexOfMeal = route.params;
   const { toast } = useToast();
-
+  const { applicationTheme } = useContext(themeContext);
+  const metaFoods = useRef(metaFoodsEnglish);
   const addCurrentFoodToMenu = () => {
     if (valuesOfFood.name != undefined && valuesOfFood.name != null) {
       menuDispatch({
@@ -43,42 +45,46 @@ export const AutoComplete = ({ route }) => {
     }
   };
 
-  const getFoodById = async (food) => {
-    await fetch(`${serverPath}${getFood.getFoodById}${food.id}`)
-      .then((response) => response.json())
-      .then((jsonResponse) => {
-        setValuesOfFood({
-          ...jsonResponse,
-          foodFromRequest: { ...jsonResponse }, //with that original object we calculate serving size(150g,200g,250g)
-          name: food.title,
-          grams: 100,
-        });
-        setShowValues(true);
-      })
-      .catch((e) => console.log("api request failed!"));
-  };
-
   return (
     <ScrollView>
       <AutocompleteDropdown
+        onChangeText={(text) => {
+          console.log(text);
+          if (text.length <= 1) {
+            if (/[a-zA-Z]/.test(text[0])) {
+              metaFoods.current = metaFoodsEnglish;
+              console.log("ENGLISH");
+            } else {
+              metaFoods.current = metaFoodsHebrew;
+              console.log("HEBRE");
+            }
+          }
+        }}
         clearOnFocus={false}
         closeOnBlur={false}
         onSelectItem={(item) => {
           if (item != null && item != undefined) {
-            getFoodById(item);
+            getFoodById(item, setShowValues);
           } else {
             setShowValues(false);
           }
           setSelectedItem(item);
         }}
-        suggestionsListMaxHeight={300}
-        dataSet={metaFoodsHebrew}
+        suggestionsListMaxHeight={200}
+        dataSet={metaFoods.current}
         textInputProps={{
           placeholder: "Enter 3 Characters to search food",
         }}
       />
-      <View style={{ alignSelf: "center" }}>
-        <Text style={{ alignSelf: "center" }}>Grams</Text>
+      <View style={{ alignSelf: "center", padding: 10 }}>
+        <Text
+          style={{
+            alignSelf: "center",
+            color: applicationTheme.styles.textColor,
+          }}
+        >
+          Grams
+        </Text>
         <GramsPicker
           setValuesOfFood={setValuesOfFood}
           valuesOfFood={valuesOfFood}
