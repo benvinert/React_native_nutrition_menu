@@ -19,7 +19,7 @@ export const moveToHomeIfUserAlreadySeenTips = async (setMoveToHome) => {
         lastDateHasSeenTips == null ||
         !cookieIsExpired(lastDateHasSeenTips)
       ) {
-        setMoveToHome(true);
+        //setMoveToHome(true);
       }
       AsyncStorage.setItem("lastDateHasSeenTips", new Date().toDateString());
     }

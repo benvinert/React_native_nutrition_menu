@@ -38,7 +38,7 @@ export default function App() {
       <ToastProvider maxToasts={2}>
         <themeContext.Provider value={{ applicationTheme }}>
           <NavigationContainer theme={applicationTheme}>
-            <Drawer.Navigator initialRouteName={"Tips"}>
+            <Drawer.Navigator initialRouteName={Home}>
               <Drawer.Screen
                 name="Tips"
                 component={OnBoarding}

@@ -23,13 +23,23 @@ export default function NutritionValues({
   }
   const { applicationTheme } = useContext(themeContext);
 
+  const handleStringFixed = (valueString) => {
+    if (typeof valueString == "string") {
+      valueString = parseFloat(valueString).toFixed(2);
+    }
+    return valueString;
+  };
+
   const nutritionValuesArray = [
-    { title: "Calories", value: nutritionValues.CALORIES.toFixed(2) },
-    { title: "Protein", value: nutritionValues.PROTEIN.toFixed(2) },
-    { title: "Carbs", value: nutritionValues.CARBS.toFixed(2) },
-    { title: "Collesterol", value: nutritionValues.COLLESTEROL.toFixed(2) },
-    { title: "Fat", value: nutritionValues.FAT.toFixed(2) },
-    { title: "Fiber", value: nutritionValues.FIBER.toFixed(2) },
+    { title: "Calories", value: handleStringFixed(nutritionValues.CALORIES) },
+    { title: "Protein", value: handleStringFixed(nutritionValues.PROTEIN) },
+    { title: "Carbs", value: handleStringFixed(nutritionValues.CARBS) },
+    {
+      title: "Collesterol",
+      value: handleStringFixed(nutritionValues.COLLESTEROL),
+    },
+    { title: "Fat", value: handleStringFixed(nutritionValues.FAT) },
+    { title: "Fiber", value: handleStringFixed(nutritionValues.FIBER) },
   ];
 
   return (
@@ -55,8 +65,8 @@ export default function NutritionValues({
         </Text>
       ) : null}
       <Divider orientation="horizontal" />
-      {nutritionValuesArray.map((eachMacro) => (
-        <View>
+      {nutritionValuesArray.map((eachMacro, index) => (
+        <View key={index}>
           <Text
             style={{
               textAlign: "center",

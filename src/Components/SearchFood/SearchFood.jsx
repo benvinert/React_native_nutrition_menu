@@ -22,7 +22,8 @@ export const AutoComplete = ({ route }) => {
   const indexOfMeal = route.params;
   const { toast } = useToast();
   const { applicationTheme } = useContext(themeContext);
-  const metaFoods = useRef(metaFoodsEnglish);
+  const [metaFoods, setMetaFoods] = useState(metaFoodsEnglish);
+
   const addCurrentFoodToMenu = () => {
     if (valuesOfFood.name != undefined && valuesOfFood.name != null) {
       menuDispatch({
@@ -50,12 +51,15 @@ export const AutoComplete = ({ route }) => {
       <AutocompleteDropdown
         onChangeText={(text) => {
           console.log(text);
+          /**
+           * Change food file language according the first character user enter.
+           */
           if (text.length <= 1) {
             if (/[a-zA-Z]/.test(text[0])) {
-              metaFoods.current = metaFoodsEnglish;
+              setMetaFoods(metaFoodsEnglish);
               console.log("ENGLISH");
             } else {
-              metaFoods.current = metaFoodsHebrew;
+              setMetaFoods(metaFoodsHebrew);
               console.log("HEBRE");
             }
           }
@@ -64,14 +68,14 @@ export const AutoComplete = ({ route }) => {
         closeOnBlur={false}
         onSelectItem={(item) => {
           if (item != null && item != undefined) {
-            getFoodById(item, setShowValues);
+            getFoodById(item, setShowValues, setValuesOfFood);
           } else {
             setShowValues(false);
           }
           setSelectedItem(item);
         }}
         suggestionsListMaxHeight={200}
-        dataSet={metaFoods.current}
+        dataSet={metaFoods}
         textInputProps={{
           placeholder: "Enter 3 Characters to search food",
         }}
