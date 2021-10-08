@@ -6,7 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 import { localStorageKeys } from "../../Constants";
 import { calculatMenuMacros } from "../../Components/NutritionMenu/NutritionTableUtils";
 import { darkMode, themeContext } from "../../ThemeProvider/ThemeManager";
-import { styleUtils } from "../../Styles/StyleUtils";
+import { textStyleUtils } from "../../Styles/StyleUtils";
+import { handleStringFixed } from "../../Components/NutritionMenu/NutritionValuesUtils";
 
 export default function AllMenus() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ export default function AllMenus() {
         }
       }
     );
-  }, [setIsLoading]); //Was also userMenus for some reason
+  }, [setIsLoading, userMenus]); //When userMenus changes we need to rerender the page because user need to see his new Menus
 
   return (
     <ScrollView>
@@ -46,7 +47,7 @@ export default function AllMenus() {
             <ListItem.Content>
               <ListItem.Title
                 style={{
-                  ...styleUtils.text_bold,
+                  ...textStyleUtils.text_bold,
                   color: applicationTheme.styles.textColor,
                 }}
               >
@@ -54,17 +55,18 @@ export default function AllMenus() {
               </ListItem.Title>
               <ListItem.Subtitle
                 style={{
-                  ...styleUtils.text_bold,
+                  ...textStyleUtils.text_bold,
                   color: applicationTheme.styles.textColor,
                 }}
               >
-                Calories : {calculatMenuMacros(eachMenu).CALORIES}
+                Calories :{" "}
+                {handleStringFixed(calculatMenuMacros(eachMenu).CALORIES)}
               </ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         ))
       ) : (
-        <Text style={styleUtils.text_center_bold_font_20}>
+        <Text style={textStyleUtils.text_center_bold_font_20}>
           You're don't have menu yet
         </Text>
       )}

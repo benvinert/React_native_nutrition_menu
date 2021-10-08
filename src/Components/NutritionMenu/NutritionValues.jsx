@@ -11,6 +11,7 @@ import { PieChart, ProgressChart } from "react-native-chart-kit";
 import { Divider } from "react-native-elements";
 import MacrosPieChart from "../MacrosPieChart/MacrosPieChart";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
+import { handleStringFixed } from "./NutritionValuesUtils";
 
 export default function NutritionValues({
   nutritionValues,
@@ -23,13 +24,6 @@ export default function NutritionValues({
   }
   const { applicationTheme } = useContext(themeContext);
 
-  const handleStringFixed = (valueString) => {
-    if (typeof valueString == "string") {
-      valueString = parseFloat(valueString).toFixed(2);
-    }
-    return valueString;
-  };
-
   const nutritionValuesArray = [
     { title: "Calories", value: handleStringFixed(nutritionValues.CALORIES) },
     { title: "Protein", value: handleStringFixed(nutritionValues.PROTEIN) },
@@ -41,6 +35,23 @@ export default function NutritionValues({
     { title: "Fat", value: handleStringFixed(nutritionValues.FAT) },
     { title: "Fiber", value: handleStringFixed(nutritionValues.FIBER) },
   ];
+
+  const styleSheet = StyleSheet.create({
+    title: {
+      fontSize: 24,
+      margin: 10,
+    },
+    container: {
+      flex: 1,
+      textAlign: "center",
+    },
+    textStyle: {
+      textAlign: "center",
+      color: applicationTheme.styles.textColor,
+      fontSize: 22,
+      padding: 5,
+    },
+  });
 
   return (
     <ScrollView style={styleSheet.container}>
@@ -56,25 +67,18 @@ export default function NutritionValues({
           {title}
         </Text>
       ) : null}
-      <Text style={{ textAlign: "center", fontSize: 22 }}>
+      <Text style={styleSheet.textStyle}>
         {!!nutritionValues.name ? nutritionValues.name : null}
       </Text>
       {!!nutritionValues.grams ? (
-        <Text style={{ textAlign: "center", fontSize: 22 }}>
+        <Text style={styleSheet.textStyle}>
           Serving size : {nutritionValues.grams}g
         </Text>
       ) : null}
       <Divider orientation="horizontal" />
       {nutritionValuesArray.map((eachMacro, index) => (
         <View key={index}>
-          <Text
-            style={{
-              textAlign: "center",
-              color: applicationTheme.styles.textColor,
-              fontSize: 22,
-              padding: 5,
-            }}
-          >
+          <Text style={styleSheet.textStyle}>
             {eachMacro.title}: {eachMacro.value}g{" "}
           </Text>
           <Divider orientation="horizontal" />
@@ -85,14 +89,3 @@ export default function NutritionValues({
     </ScrollView>
   );
 }
-
-const styleSheet = StyleSheet.create({
-  title: {
-    fontSize: 24,
-    margin: 10,
-  },
-  container: {
-    flex: 1,
-    textAlign: "center",
-  },
-});

@@ -35,21 +35,8 @@ const menuReducer = (state, action) => {
     case "PUT_MENU_TO_EDIT":
       return action.param.menuToEdit;
     case "CLEAR_AFTER_SAVE_MENU":
-      const deepCopyMenu = [
-        {
-          mealTime: "Breakfast",
-          foods: [],
-        },
-        {
-          mealTime: "Lunch",
-          foods: [],
-        },
-        {
-          mealTime: "Dinner",
-          foods: [],
-        },
-      ];
-      return { ...INIT_STATE_OF_MENU, menu: [...deepCopyMenu] };
+      //Use JSON because i want to do Deep copy
+      return JSON.parse(JSON.stringify(INIT_STATE_OF_MENU));
     default:
       return state;
   }
@@ -57,24 +44,11 @@ const menuReducer = (state, action) => {
 
 export default function NutritionTableNavigator({ route, navigation }) {
   const Stack = createStackNavigator();
-  const deepCopyMenu = [
-    {
-      mealTime: "Breakfast",
-      foods: [],
-    },
-    {
-      mealTime: "Lunch",
-      foods: [],
-    },
-    {
-      mealTime: "Dinner",
-      foods: [],
-    },
-  ];
-  const [menuState, menuDispatch] = useReducer(menuReducer, {
-    ...INIT_STATE_OF_MENU,
-    menu: deepCopyMenu,
-  });
+  const [menuState, menuDispatch] = useReducer(
+    menuReducer,
+    //Use JSON because i want to do Deep copy
+    JSON.parse(JSON.stringify(INIT_STATE_OF_MENU))
+  );
 
   return (
     <createMenuContext.Provider value={{ menuState, menuDispatch }}>

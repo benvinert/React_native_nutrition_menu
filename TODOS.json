@@ -21,7 +21,12 @@
       }
     }
   ],
-  "LEARNED": {
-    "Cookies": "put via AsyncLocalStorage and set on him expire date and checked it every time."
-  }
+  "LEARNED": [
+    {
+      "Cookies": "put via AsyncLocalStorage and set on him expire date and checked it every time."
+    },
+    {
+      "Spread operator": "deep copy and shallow copy !!!USE JSON PARSE AND STRINGIFY FOR DEEP COPY!!!"
+    }
+  ]
 }
