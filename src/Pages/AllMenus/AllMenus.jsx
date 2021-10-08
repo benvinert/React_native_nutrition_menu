@@ -5,7 +5,8 @@ import { ListItem, Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import { localStorageKeys } from "../../Constants";
 import { calculatMenuMacros } from "../../Components/NutritionMenu/NutritionTableUtils";
-import { themeContext } from "../../ThemeProvider/ThemeManager";
+import { darkMode, themeContext } from "../../ThemeProvider/ThemeManager";
+import { styleUtils } from "../../Styles/StyleUtils";
 
 export default function AllMenus() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,6 @@ export default function AllMenus() {
     );
   }, [setIsLoading]); //Was also userMenus for some reason
 
-  console.log("From Menu L ", applicationTheme);
   return (
     <ScrollView>
       {isLoading ? (
@@ -46,16 +46,16 @@ export default function AllMenus() {
             <ListItem.Content>
               <ListItem.Title
                 style={{
+                  ...styleUtils.text_bold,
                   color: applicationTheme.styles.textColor,
-                  fontWeight: "bold",
                 }}
               >
                 {eachMenu.nameOfMenu}
               </ListItem.Title>
               <ListItem.Subtitle
                 style={{
+                  ...styleUtils.text_bold,
                   color: applicationTheme.styles.textColor,
-                  fontWeight: "bold",
                 }}
               >
                 Calories : {calculatMenuMacros(eachMenu).CALORIES}
@@ -64,16 +64,10 @@ export default function AllMenus() {
           </ListItem>
         ))
       ) : (
-        <Text style={styles.textStyle}>You're don't have menu yet</Text>
+        <Text style={styleUtils.text_center_bold_font_20}>
+          You're don't have menu yet
+        </Text>
       )}
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  textStyle: {
-    alignSelf: "center",
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-});

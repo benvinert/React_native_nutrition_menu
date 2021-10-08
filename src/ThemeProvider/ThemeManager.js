@@ -21,4 +21,11 @@ export const darkMode = {
   },
 };
 
-export const defaultMode = { ...DefaultTheme, mode: "default" };
+export const defaultMode = {
+  ...DefaultTheme,
+  mode: "default",
+  styles: {
+    background: "rgb(242, 242, 242)",
+    textColor: "rgb(28, 28, 30)",
+  },
+};
