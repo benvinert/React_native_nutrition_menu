@@ -59,7 +59,6 @@ export default function NutritionValues({
         <Text
           style={{
             textAlign: "center",
-            fontFamily: "sans-serif-light",
             fontSize: 30,
             color: applicationTheme.styles.textColor,
           }}
