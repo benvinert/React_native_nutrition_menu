@@ -2,7 +2,7 @@ import React from "react";
 import { INIT_STATE_OF_MACROS } from "../../Constants";
 
 export const calculateMealMacros = (eachMeal) => {
-  const mealMacros = { ...INIT_STATE_OF_MACROS };
+  const mealMacros = JSON.parse(JSON.stringify(INIT_STATE_OF_MACROS));
   eachMeal.foods.forEach((eachFood) => {
     mealMacros.CALORIES += eachFood.CALORIES;
     mealMacros.CARBS += eachFood.CARBS;
@@ -11,11 +11,12 @@ export const calculateMealMacros = (eachMeal) => {
     mealMacros.COLLESTEROL += eachFood.COLLESTEROL;
     mealMacros.FAT += eachFood.FAT;
   });
+  console.log("Final Meal Macros", mealMacros);
   return mealMacros;
 };
 
 export const calculatMenuMacros = (menuObject) => {
-  const sumOfMenuMacros = { ...INIT_STATE_OF_MACROS };
+  const sumOfMenuMacros = JSON.parse(JSON.stringify(INIT_STATE_OF_MACROS));
   menuObject.menu.map((eachMeal) => {
     if (eachMeal.foods.length > 0) {
       let macrosMeal = calculateMealMacros(eachMeal);

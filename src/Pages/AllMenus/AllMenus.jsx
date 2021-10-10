@@ -23,7 +23,7 @@ export default function AllMenus() {
         }
       }
     );
-  }, [setIsLoading, userMenus]); //When userMenus changes we need to rerender the page because user need to see his new Menus
+  }, [setIsLoading]); //When userMenus changes we need to rerender the page because user need to see his new Menus
 
   return (
     <ScrollView>

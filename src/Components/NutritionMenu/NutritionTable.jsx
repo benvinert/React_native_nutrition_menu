@@ -1,7 +1,14 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { CellVariant, HeaderSection } from "./NutritionTableStyleSheet";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
-import { StyleSheet, View, Button, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Button,
+  Text,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { createMenuContext } from "./Context/createMenuContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -43,7 +50,7 @@ export const NutritionTable = ({ route, navigation }) => {
   //TODO When save menu save NOT DUPLICATE!!!
   const sumOfMenuMacros = calculatMenuMacros(menuObject);
   const { applicationTheme } = useContext(themeContext);
-
+  console.log(sumOfMenuMacros);
   return (
     <ScrollView
       style={{
@@ -117,7 +124,7 @@ export const NutritionTable = ({ route, navigation }) => {
         />
       ) : null}
       <View>
-        {sumOfMenuMacros.CALORIES > 0 ? (
+        {sumOfMenuMacros.CALORIES >= 0 ? (
           <NutritionValues
             nutritionValues={sumOfMenuMacros}
             title={"Sum of menu macros"}
