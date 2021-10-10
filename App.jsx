@@ -15,6 +15,9 @@ import OnBoarding from "./src/Components/OnBoarding/OnBoarding";
 import { SafeAreaView } from "react-native";
 import { darkMode, themeContext } from "./src/ThemeProvider/ThemeManager";
 import Settings from "./src/Pages/Settings/Settings";
+import en from "./src/translations/en";
+import he from "./src/translations/he";
+import { translationsContext } from "./src/translations/LocaleManager";
 
 const Drawer = createDrawerNavigator();
 const theme = {
@@ -32,48 +35,51 @@ const theme = {
 
 export default function App() {
   const [applicationTheme, setApplicationTheme] = useState(darkMode);
-
+  const [language, setLanguage] = useState(he);
+  console.log(language);
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>
         <themeContext.Provider value={{ applicationTheme }}>
-          <NavigationContainer theme={applicationTheme}>
-            <Drawer.Navigator initialRouteName={Home}>
-              <Drawer.Screen
-                name="Tips"
-                component={OnBoarding}
-                initialParams={{ navigateTo: "Tips" }}
-              />
-              <Drawer.Screen
-                name="Home"
-                component={Home}
-                options={{ title: "Welcome" }}
-              />
-              <Drawer.Screen
-                name="My menus"
-                component={NutritionTableNavigator}
-                initialParams={{ navigateTo: "AllMenus" }}
-              />
-              <Drawer.Screen
-                name="BMR Calculator"
-                initialParams={{ myname: "ben" }}
-                component={BmrCalculator}
-              />
-              <Drawer.Screen
-                name="Create Menu"
-                component={NutritionTableNavigator}
-                initialParams={{ navigateTo: "Select name of menu" }}
-              />
-              <Drawer.Screen
-                name="Settings"
-                component={Settings}
-                initialParams={{
-                  navigateTo: "Settings",
-                  setTheme: setApplicationTheme,
-                }}
-              />
-            </Drawer.Navigator>
-          </NavigationContainer>
+          <translationsContext.Provider value={{ language }}>
+            <NavigationContainer theme={applicationTheme}>
+              <Drawer.Navigator initialRouteName={Home}>
+                <Drawer.Screen
+                  name="Tips"
+                  component={OnBoarding}
+                  initialParams={{ navigateTo: "Tips" }}
+                />
+                <Drawer.Screen
+                  name="Home"
+                  component={Home}
+                  options={{ title: "Welcome" }}
+                />
+                <Drawer.Screen
+                  name="My menus"
+                  component={NutritionTableNavigator}
+                  initialParams={{ navigateTo: "AllMenus" }}
+                />
+                <Drawer.Screen
+                  name="BMR Calculator"
+                  initialParams={{ myname: "ben" }}
+                  component={BmrCalculator}
+                />
+                <Drawer.Screen
+                  name="Create Menu"
+                  component={NutritionTableNavigator}
+                  initialParams={{ navigateTo: "Select name of menu" }}
+                />
+                <Drawer.Screen
+                  name={language.app.Settings}
+                  component={Settings}
+                  initialParams={{
+                    navigateTo: "Settings",
+                    setTheme: setApplicationTheme,
+                  }}
+                />
+              </Drawer.Navigator>
+            </NavigationContainer>
+          </translationsContext.Provider>
         </themeContext.Provider>
       </ToastProvider>
     </ThemeProvider>
