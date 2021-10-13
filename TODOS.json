@@ -1,0 +1,32 @@
+{
+  "TODOS": [
+    {
+      "tips": {
+        "description": "when client open app , app would suggest him tips and client can slide them ---------DONE---------"
+      }
+    },
+    {
+      "dark mode": {
+        "desc": "use redux and styled component to dark mode, create buttons and layouts reusable"
+      }
+    },
+    {
+      "reminders": {
+        "desc": "client can set him reminders to eat or train or to drink water"
+      }
+    },
+    {
+      "schedule": {
+        "desc": "client have schedule and he can set part of body he train on each day ,when his rest days etc..."
+      }
+    }
+  ],
+  "LEARNED": [
+    {
+      "Cookies": "put via AsyncLocalStorage and set on him expire date and checked it every time."
+    },
+    {
+      "Spread operator": "deep copy and shallow copy !!!USE JSON PARSE AND STRINGIFY FOR DEEP COPY!!!"
+    }
+  ]
+}
