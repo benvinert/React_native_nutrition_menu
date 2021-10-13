@@ -11,7 +11,10 @@ export default function GramsPicker({ setValuesOfFood, valuesOfFood }) {
       buttonStyle={{ backgroundColor: "#707070", borderRadius: 5 }}
       data={servingSizeGram}
       onSelect={(selectedGram, index) => {
-        setValuesOfFoodMacrosByServingSize(selectedGram, setValuesOfFood);
+        //Check if food selected
+        if (valuesOfFood?.name) {
+          setValuesOfFoodMacrosByServingSize(selectedGram, setValuesOfFood);
+        }
       }}
       defaultValue={valuesOfFood.grams}
       buttonTextAfterSelection={(selectedItem, index) => {

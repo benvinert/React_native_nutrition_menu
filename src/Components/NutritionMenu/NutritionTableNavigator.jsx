@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useContext } from "react";
 import { Cell, Section, TableView } from "react-native-tableview-simple";
 import {
   View,
@@ -16,31 +16,8 @@ import AllMenus from "../../Pages/AllMenus/AllMenus";
 import SelectMenuName from "../../Pages/CreateMenu/SelectMenuName";
 import { INIT_STATE_OF_MENU } from "../../Constants";
 import NutritionValues from "./NutritionValues";
-
-const menuReducer = (state, action) => {
-  switch (action.execute) {
-    case "ADD_FOOD":
-      state.menu[action.param.indexOfMeal].foods.push(
-        action.param.valuesOfFood
-      );
-      return { ...state, menu: state.menu };
-    case "REMOVE_FOOD":
-      let indexOfMeal = action.param.indexOfMeal;
-      let indexOfFoodToRemove = action.param.indexOfFoodToRemove;
-      console.log(state.menu);
-      state.menu[indexOfMeal].foods.splice(indexOfFoodToRemove, 1);
-      return { ...state };
-    case "SAVE_NAME_MENU":
-      return { ...state, nameOfMenu: action.param };
-    case "PUT_MENU_TO_EDIT":
-      return action.param.menuToEdit;
-    case "CLEAR_AFTER_SAVE_MENU":
-      //Use JSON because i want to do Deep copy
-      return JSON.parse(JSON.stringify(INIT_STATE_OF_MENU));
-    default:
-      return state;
-  }
-};
+import { translationsContext } from "../../translations/LocaleManager";
+import { menuReducer } from "./NutritionTableReducer";
 
 export default function NutritionTableNavigator({ route, navigation }) {
   const Stack = createStackNavigator();
@@ -49,17 +26,26 @@ export default function NutritionTableNavigator({ route, navigation }) {
     //Use JSON because i want to do Deep copy
     JSON.parse(JSON.stringify(INIT_STATE_OF_MENU))
   );
-
+  const { language } = useContext(translationsContext);
+  console.log("HEBREWWWWW", language.app);
   return (
     <createMenuContext.Provider value={{ menuState, menuDispatch }}>
       <Stack.Navigator initialRouteName={route.params.navigateTo}>
-        <Stack.Screen name="AllMenus" component={AllMenus} />
+        <Stack.Screen
+          name="AllMenus"
+          component={AllMenus}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="NutritionTable"
           options={({ route }) => ({ title: route.params.nameOfMenu })}
           component={NutritionTable}
         />
-        <Stack.Screen name="Select name of menu" component={SelectMenuName} />
+        <Stack.Screen
+          name="Select name of menu"
+          component={SelectMenuName}
+          options={{ title: language.app.select_name_of_menu }}
+        />
         <Stack.Screen name="Add food" component={AutoComplete} />
         <Stack.Screen name="Values of food" component={NutritionValues} />
       </Stack.Navigator>

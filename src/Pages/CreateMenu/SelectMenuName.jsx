@@ -5,10 +5,13 @@ import { createMenuContext } from "../../Components/NutritionMenu/Context/create
 import { useNavigation } from "@react-navigation/native";
 import { useToast } from "react-native-styled-toast";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
+import { translationsContext } from "../../translations/LocaleManager";
 
 export default function SelectMenuName() {
   const [nameOfMenu, setNameOfMenu] = useState("");
   const { menuState, menuDispatch } = useContext(createMenuContext);
+  const { language } = useContext(translationsContext);
+
   const navigation = useNavigation();
   const { toast } = useToast();
   const { applicationTheme } = useContext(themeContext);
@@ -29,14 +32,14 @@ export default function SelectMenuName() {
           color: applicationTheme.styles.textColor,
           textAlign: "center",
         }}
-        placeholder="Enter name of menu"
+        placeholder={language.app.enter_name_of_menu}
         onChangeText={(value) => {
           setNameOfMenu(value);
         }}
         value={nameOfMenu}
       />
       <Button
-        title="Save"
+        title={language.app.save}
         onPress={() => {
           if (nameOfMenu.length >= 3) {
             saveMenuEvent();

@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { removeFoodFromMenu } from "./NutritionTableService";
 import { createMenuContext } from "../../Components/NutritionMenu/Context/createMenuContext";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
+import { translationsContext } from "../../translations/LocaleManager";
 
 export const CellVariant = ({
   foodDetails,
@@ -68,6 +69,7 @@ export const CellVariant = ({
 };
 
 export const HeaderSection = ({ mealTime, indexOfMeal, isEditable }) => {
+  const { language } = useContext(translationsContext);
   const { applicationTheme } = useContext(themeContext);
   const navigation = useNavigation();
 
@@ -85,7 +87,7 @@ export const HeaderSection = ({ mealTime, indexOfMeal, isEditable }) => {
       <TouchableHighlight>
         <View>
           <Button
-            title="Add"
+            title={language.app.add}
             onPress={() => navigation.navigate("Add food", indexOfMeal)}
           />
         </View>

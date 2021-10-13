@@ -8,11 +8,13 @@ import { calculatMenuMacros } from "../../Components/NutritionMenu/NutritionTabl
 import { darkMode, themeContext } from "../../ThemeProvider/ThemeManager";
 import { textStyleUtils } from "../../Styles/StyleUtils";
 import { handleStringFixed } from "../../Components/NutritionMenu/NutritionValuesUtils";
+import { translationsContext } from "../../translations/LocaleManager";
 
 export default function AllMenus() {
   const [isLoading, setIsLoading] = useState(true);
   const [userMenus, setUserMenus] = useState({ userMenus: [] });
   const { applicationTheme } = useContext(themeContext);
+  const { language } = useContext(translationsContext);
   const navigation = useNavigation();
   useEffect(() => {
     AsyncStorage.getItem(localStorageKeys.USER_MENUS).then(
@@ -59,8 +61,8 @@ export default function AllMenus() {
                   color: applicationTheme.styles.textColor,
                 }}
               >
-                Calories :{" "}
                 {handleStringFixed(calculatMenuMacros(eachMenu).CALORIES)}
+                {" " + language.app.calories}
               </ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>

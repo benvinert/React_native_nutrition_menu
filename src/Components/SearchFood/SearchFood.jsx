@@ -13,9 +13,12 @@ import GramsPicker from "../GramsPicker/GramsPicker";
 import { ScrollView } from "react-native-gesture-handler";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
 import { getFoodById } from "./SearchFoodService";
+import { translationsContext } from "../../translations/LocaleManager";
+import { changeMetaFoodAccordingLanguage } from "./SearchFoodUtils";
 
 export const AutoComplete = ({ route }) => {
   const { menuState, menuDispatch } = useContext(createMenuContext);
+  const { language } = useContext(translationsContext);
   const [selectedItem, setSelectedItem] = useState(null);
   const [valuesOfFood, setValuesOfFood] = useState({ grams: 100 }); //100g is a default
   const [showValues, setShowValues] = useState(false);
@@ -31,13 +34,13 @@ export const AutoComplete = ({ route }) => {
         param: { valuesOfFood: valuesOfFood, indexOfMeal: indexOfMeal },
       });
       toast({
-        message: "Added Successfully",
+        message: language.messages.added_successfully,
         iconFamily: "FontAwesome",
         iconName: "check-circle",
       });
     } else {
       toast({
-        message: "You're need to pick a food",
+        message: language.messages.you_need_to_pick_a_food,
         iconFamily: "FontAwesome",
         iconName: "exclamation-circle",
         accentColor: "red",
@@ -49,21 +52,9 @@ export const AutoComplete = ({ route }) => {
   return (
     <ScrollView>
       <AutocompleteDropdown
-        onChangeText={(text) => {
-          console.log(text);
-          /**
-           * Change food file language according the first character user enter.
-           */
-          if (text.length <= 1) {
-            if (/[a-zA-Z]/.test(text[0])) {
-              setMetaFoods(metaFoodsEnglish);
-              console.log("ENGLISH");
-            } else {
-              setMetaFoods(metaFoodsHebrew);
-              console.log("HEBRE");
-            }
-          }
-        }}
+        onChangeText={(text) =>
+          changeMetaFoodAccordingLanguage(text, setMetaFoods)
+        }
         clearOnFocus={false}
         closeOnBlur={false}
         onSelectItem={(item) => {
@@ -77,7 +68,7 @@ export const AutoComplete = ({ route }) => {
         suggestionsListMaxHeight={200}
         dataSet={metaFoods}
         textInputProps={{
-          placeholder: "Enter 3 Characters to search food",
+          placeholder: language.messages.enter_3_characters_to_search,
         }}
       />
       <View style={{ alignSelf: "center", padding: 10 }}>
@@ -87,7 +78,7 @@ export const AutoComplete = ({ route }) => {
             color: applicationTheme.styles.textColor,
           }}
         >
-          Grams
+          {language.app.grams}
         </Text>
         <GramsPicker
           setValuesOfFood={setValuesOfFood}
@@ -96,7 +87,7 @@ export const AutoComplete = ({ route }) => {
       </View>
 
       <Button
-        title="Add to you're menu"
+        title={language.app.add_to_your_menu}
         icon={
           <Icon
             style={{ marginLeft: 7 }}
@@ -113,7 +104,7 @@ export const AutoComplete = ({ route }) => {
         {showValues && (
           <NutritionValues
             nutritionValues={valuesOfFood}
-            title={"Values of food"}
+            title={language.app.values_of_food}
           />
         )}
       </View>

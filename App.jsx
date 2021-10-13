@@ -34,9 +34,11 @@ const theme = {
 };
 
 export default function App() {
+  //Store//
   const [applicationTheme, setApplicationTheme] = useState(darkMode);
   const [language, setLanguage] = useState(he);
-  console.log(language);
+  //-----//
+
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>
@@ -48,34 +50,40 @@ export default function App() {
                   name="Tips"
                   component={OnBoarding}
                   initialParams={{ navigateTo: "Tips" }}
+                  options={{ title: language.app.tips }}
                 />
                 <Drawer.Screen
                   name="Home"
                   component={Home}
-                  options={{ title: "Welcome" }}
+                  options={{ title: language.app.welcome }}
                 />
                 <Drawer.Screen
                   name="My menus"
                   component={NutritionTableNavigator}
                   initialParams={{ navigateTo: "AllMenus" }}
+                  options={{ title: language.app.my_menus }}
                 />
                 <Drawer.Screen
                   name="BMR Calculator"
                   initialParams={{ myname: "ben" }}
                   component={BmrCalculator}
+                  options={{ title: language.app.bmr_calculator }}
                 />
                 <Drawer.Screen
                   name="Create Menu"
                   component={NutritionTableNavigator}
                   initialParams={{ navigateTo: "Select name of menu" }}
+                  options={{ title: language.app.create_menu }}
                 />
                 <Drawer.Screen
-                  name={language.app.Settings}
+                  name="Settings"
                   component={Settings}
                   initialParams={{
                     navigateTo: "Settings",
                     setTheme: setApplicationTheme,
+                    setLanguage: setLanguage,
                   }}
+                  options={{ title: language.app.settings }}
                 />
               </Drawer.Navigator>
             </NavigationContainer>

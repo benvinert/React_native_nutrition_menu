@@ -12,6 +12,7 @@ import { Divider } from "react-native-elements";
 import MacrosPieChart from "../MacrosPieChart/MacrosPieChart";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
 import { handleStringFixed } from "./NutritionValuesUtils";
+import { translationsContext } from "../../translations/LocaleManager";
 
 export default function NutritionValues({
   nutritionValues,
@@ -22,18 +23,31 @@ export default function NutritionValues({
   if (route != null && route != undefined) {
     nutritionValues = route.params.item;
   }
+  const { language } = useContext(translationsContext);
   const { applicationTheme } = useContext(themeContext);
 
   const nutritionValuesArray = [
-    { title: "Calories", value: handleStringFixed(nutritionValues.CALORIES) },
-    { title: "Protein", value: handleStringFixed(nutritionValues.PROTEIN) },
-    { title: "Carbs", value: handleStringFixed(nutritionValues.CARBS) },
     {
-      title: "Collesterol",
+      title: language.app.calories,
+      value: handleStringFixed(nutritionValues.CALORIES),
+    },
+    {
+      title: language.app.protein,
+      value: handleStringFixed(nutritionValues.PROTEIN),
+    },
+    {
+      title: language.app.carbs,
+      value: handleStringFixed(nutritionValues.CARBS),
+    },
+    {
+      title: language.app.collesterol,
       value: handleStringFixed(nutritionValues.COLLESTEROL),
     },
-    { title: "Fat", value: handleStringFixed(nutritionValues.FAT) },
-    { title: "Fiber", value: handleStringFixed(nutritionValues.FIBER) },
+    { title: language.app.fat, value: handleStringFixed(nutritionValues.FAT) },
+    {
+      title: language.app.fiber,
+      value: handleStringFixed(nutritionValues.FIBER),
+    },
   ];
 
   const styleSheet = StyleSheet.create({
@@ -71,7 +85,7 @@ export default function NutritionValues({
       </Text>
       {!!nutritionValues.grams ? (
         <Text style={styleSheet.textStyle}>
-          Serving size : {nutritionValues.grams}g
+          {language.app.serving_size} : {nutritionValues.grams}g
         </Text>
       ) : null}
       <Divider orientation="horizontal" />

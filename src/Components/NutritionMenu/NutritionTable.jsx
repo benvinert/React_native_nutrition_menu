@@ -23,11 +23,13 @@ import {
 } from "./NutritionTableService";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
+import { translationsContext } from "../../translations/LocaleManager";
 
 //That Component uses on 2 pages 1-> AllMenus 2-> Create new menu
 export const NutritionTable = ({ route, navigation }) => {
   const { toast } = useToast();
   const { menuState, menuDispatch } = useContext(createMenuContext);
+  const { language } = useContext(translationsContext);
   var menuObject;
   var userMenus = { userMenus: [] };
   let indexOfMenu = useRef(null);
@@ -65,7 +67,7 @@ export const NutritionTable = ({ route, navigation }) => {
             color: "blue",
             backgroundColor: "#5B00BC",
           }}
-          text="Edit menu"
+          text={language.app.edit_menu}
           onPress={() => {
             uploadMenuToContextState(menuDispatch, menuObject);
             setIsEditable(true);
@@ -120,14 +122,14 @@ export const NutritionTable = ({ route, navigation }) => {
               navigation.navigate("AllMenus");
             }, 2000);
           }}
-          text="Save"
+          text={language.app.save}
         />
       ) : null}
       <View>
         {sumOfMenuMacros.CALORIES >= 0 ? (
           <NutritionValues
             nutritionValues={sumOfMenuMacros}
-            title={"Sum of menu macros"}
+            title={language.app.sum_of_menu_macros}
           />
         ) : null}
       </View>
