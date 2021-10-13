@@ -36,10 +36,10 @@ Application support on English and Hebrew.
 
 ![Change grams](https://user-images.githubusercontent.com/64857968/137195462-75f7b9fb-da62-4956-b596-bf6630c71d60.gif)
 
-  <h1>Settings page</h1>
+<h1>Settings page</h1>
 <h1>Can change languages and theme.</h1>
 
-![Settings Theme Light and Dark](https://user-images.githubusercontent.com/64857968/137197374-f8c7917f-facf-480a-b0f0-6a3924fd469c.gif)
+![Settings s](https://user-images.githubusercontent.com/64857968/137197710-44530e35-7030-4417-aad9-813a6f46bc37.gif)
 
   
 <h1>Tools </h1>
