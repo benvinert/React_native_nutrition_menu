@@ -12,7 +12,8 @@ Application support on English and Hebrew.
 
 <h1>Search food ( Dark mode )</h1>
 
-![search food light](https://user-images.githubusercontent.com/64857968/137195596-10db88a3-e5cb-4dfe-9b65-69061e67dbfd.png)
+![Search food](https://user-images.githubusercontent.com/64857968/137197309-aacd7128-f3da-4b90-a452-09a4eec05536.png)
+
 <h1>Search food ( Light mode )</h1>
 
 ![search food light](https://user-images.githubusercontent.com/64857968/137195879-70c891d2-3cfe-45cf-9683-6704a93ebb67.png)
@@ -38,7 +39,8 @@ Application support on English and Hebrew.
   <h1>Settings page</h1>
 <h1>Can change languages and theme.</h1>
 
-![Settings Theme Light and Dark](https://user-images.githubusercontent.com/64857968/137196175-2156f29a-d5f8-4f7d-b5c4-669c81fc1323.gif)
+![Settings Theme Light and Dark](https://user-images.githubusercontent.com/64857968/137197374-f8c7917f-facf-480a-b0f0-6a3924fd469c.gif)
+
   
 <h1>Tools </h1>
 <ul>
