@@ -3,7 +3,7 @@
 <h1>What is?</h1>
 <h4>
 Nutrition menu gave to create menu nutrition and see all values (Macros) of menu , 
-User can search any food , see his values diagram , and decide if add it or not , after user build his menu ,
+User can search any food he want from 2642 foods we are collect , see his values diagram , and decide if add it or not , after user build his menu ,
 he can save it on his phone.
 Application have dark mode & light mode.
 Application support on English and Hebrew.
