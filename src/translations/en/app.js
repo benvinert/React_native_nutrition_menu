@@ -28,4 +28,5 @@ export default {
   dark: "Dark",
   add_food: "Add food",
   all_menus: "All menus",
+  ready_to_get_healthy: "Ready to get Healthy",
 };

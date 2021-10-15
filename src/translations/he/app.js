@@ -28,4 +28,5 @@ export default {
   dark: "חשוך",
   add_food: "הוספת מאכל",
   all_menus: "כל התפריטים",
+  ready_to_get_healthy: "מוכן להיות בריא",
 };

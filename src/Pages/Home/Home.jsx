@@ -9,8 +9,11 @@ import {
   ImageBackground,
 } from "react-native";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
-
+import { useNavigation } from "@react-navigation/native";
+import { translationsContext } from "../../translations/LocaleManager";
 export default function Home() {
+  const navigation = useNavigation();
+  const { language } = useContext(translationsContext);
   const { applicationTheme } = useContext(themeContext);
   return (
     <SafeAreaView>
@@ -25,7 +28,10 @@ export default function Home() {
         }}
       />
       <View styles={styles.container}>
-        <Button title="Getting started" />
+        <Button
+          title={language.app.ready_to_get_healthy}
+          onPress={() => navigation.navigate("Create Menu")}
+        />
       </View>
     </SafeAreaView>
   );
