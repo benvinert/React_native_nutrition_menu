@@ -25,7 +25,7 @@ export default function AllMenus() {
         }
       }
     );
-  }, [setIsLoading]); //When userMenus changes we need to rerender the page because user need to see his new Menus
+  }, [setIsLoading, userMenus]); //When userMenus changes we need to rerender the page because user need to see his new Menus
 
   return (
     <ScrollView>

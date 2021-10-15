@@ -26,4 +26,6 @@ export default {
   language_english: "English",
   light: "מואר",
   dark: "חשוך",
+  add_food: "הוספת מאכל",
+  all_menus: "כל התפריטים",
 };

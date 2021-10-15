@@ -33,15 +33,31 @@ export default function NutritionTableNavigator({ route, navigation }) {
   return (
     <createMenuContext.Provider value={{ menuState, menuDispatch }}>
       <Stack.Navigator initialRouteName={route.params.navigateTo}>
-        <Stack.Screen name="AllMenus" component={AllMenus} />
+        <Stack.Screen
+          name="AllMenus"
+          component={AllMenus}
+          options={{ title: language.app.select_name_of_menu }}
+        />
         <Stack.Screen
           name="NutritionTable"
           options={({ route }) => ({ title: route.params.nameOfMenu })}
           component={NutritionTable}
         />
-        <Stack.Screen name="Select name of menu" component={SelectMenuName} />
-        <Stack.Screen name="Add food" component={AutoComplete} />
-        <Stack.Screen name="Values of food" component={ValuesOfFood} />
+        <Stack.Screen
+          name="Select name of menu"
+          component={SelectMenuName}
+          options={{ title: language.app.select_name_of_menu }}
+        />
+        <Stack.Screen
+          name="Add food"
+          component={AutoComplete}
+          options={{ title: language.app.select_name_of_menu }}
+        />
+        <Stack.Screen
+          name="Values of food"
+          component={ValuesOfFood}
+          options={{ title: language.app.select_name_of_menu }}
+        />
       </Stack.Navigator>
     </createMenuContext.Provider>
   );

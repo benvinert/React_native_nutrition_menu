@@ -54,7 +54,7 @@ export default function Settings({ navigation, route }) {
         </View>
         <View style={styles.row}>
           <Text style={{ color: applicationTheme.styles.textColor }}>
-            {language.app.light}
+            {language.app.dark}
           </Text>
           <Switch
             trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -64,7 +64,7 @@ export default function Settings({ navigation, route }) {
             value={isEnabled}
           />
           <Text style={{ color: applicationTheme.styles.textColor }}>
-            {language.app.dark}
+            {language.app.light}
           </Text>
         </View>
         <View style={styles.row}>

@@ -34,7 +34,7 @@ export default function NutritionTableNavigator({ route, navigation }) {
         <Stack.Screen
           name="AllMenus"
           component={AllMenus}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, title: language.app.all_menus }}
         />
         <Stack.Screen
           name="NutritionTable"
@@ -46,8 +46,16 @@ export default function NutritionTableNavigator({ route, navigation }) {
           component={SelectMenuName}
           options={{ title: language.app.select_name_of_menu }}
         />
-        <Stack.Screen name="Add food" component={AutoComplete} />
-        <Stack.Screen name="Values of food" component={NutritionValues} />
+        <Stack.Screen
+          name="Add food"
+          component={AutoComplete}
+          options={{ title: language.app.add_food }}
+        />
+        <Stack.Screen
+          name="Values of food"
+          component={NutritionValues}
+          options={{ title: language.app.value_of_food }}
+        />
       </Stack.Navigator>
     </createMenuContext.Provider>
   );

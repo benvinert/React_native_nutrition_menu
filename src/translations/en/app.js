@@ -26,4 +26,6 @@ export default {
   language_english: "English",
   light: "Light",
   dark: "Dark",
+  add_food: "Add food",
+  all_menus: "All menus",
 };
