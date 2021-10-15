@@ -3,7 +3,7 @@
 <h1>What is?</h1>
 <h4>
 Nutrition menu give to user create menu nutrition and see all values (Macros) and diagrams of menu , 
-User can search any food he want from 2,642 foods we are collect , see his values diagram , and decide if add it or not , after user build his menu ,
+User can search any food he want from 2,642 foods(English & Hebrew) we are collect , see his values diagram , and decide if add it or not , after user build his menu ,
 he can save it on his phone.
 Application have dark mode & light mode.
 Application support on English and Hebrew.
@@ -16,19 +16,29 @@ Application support on English and Hebrew.
 
 <h1>Search food ( Light mode )</h1>
 
-![search food light](https://user-images.githubusercontent.com/64857968/137195879-70c891d2-3cfe-45cf-9683-6704a93ebb67.png)
+![new 1 Search food](https://user-images.githubusercontent.com/64857968/137450784-a8e9a16b-a495-4790-8f0c-663324f1da1c.png)
+
+![תפריט](https://user-images.githubusercontent.com/64857968/137454148-d0d47a65-ceea-41c9-af92-c09c0b60c9d8.png)
+
+
+<h1>Search Hebrew food </h1>
+
+![search hebrew12](https://user-images.githubusercontent.com/64857968/137452389-022dde3e-8e50-4f5f-a455-19d057290006.gif)
+
 
 ![Choose food](https://user-images.githubusercontent.com/64857968/137195814-3c07726f-8cd8-4111-a712-785c718fec2c.gif)
 
-<h1>See values of food(Light mode)</h1>
+<h1>See values of food(Dark mode)</h1>
 
 ![Diagram](https://user-images.githubusercontent.com/64857968/137195479-b1c0db8d-345d-4148-a770-8d62d10a1275.png)
 
-<h1>See values of food(Dark mode)</h1>
+<h1>See values of food(Light mode)</h1>
   
 ![Search food light 2](https://user-images.githubusercontent.com/64857968/137195493-e2142960-c621-4200-a3a7-64e011d23c24.png)
 
-![Change grams and save](https://user-images.githubusercontent.com/64857968/137196036-c48241f7-96d7-474c-9f41-ff0a9b3d28d3.gif)
+
+![menu pageee](https://user-images.githubusercontent.com/64857968/137453254-72236246-c1ee-4ecd-b2e4-67ba970105c8.gif)
+
 
 <h1>Menu page</h1>
 
@@ -39,11 +49,11 @@ Application support on English and Hebrew.
 <h1>Settings page</h1>
 <h1>Can change languages and theme.</h1>
 
-![Settings s](https://user-images.githubusercontent.com/64857968/137197710-44530e35-7030-4417-aad9-813a6f46bc37.gif)
+![NEW settings switch  gif](https://user-images.githubusercontent.com/64857968/137452550-ef9c627a-dec8-43a8-9e8f-7b4668a54ab0.gif)
 
   
 <h1>Tools </h1>
 <ul>
-  <li>Java Spring</li>
+  <li>Java ( Spring , Spring boot )</li>
   <li>React Native</li>
 </ul>
