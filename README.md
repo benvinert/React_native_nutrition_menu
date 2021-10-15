@@ -14,9 +14,10 @@ Application support on English and Hebrew.
 
 ![Search food](https://user-images.githubusercontent.com/64857968/137197309-aacd7128-f3da-4b90-a452-09a4eec05536.png)
 
-<h1>Search food ( Light mode )</h1>
+<h1> Search food ( Light mode ) </h1>
 
-![new 1 Search food](https://user-images.githubusercontent.com/64857968/137450784-a8e9a16b-a495-4790-8f0c-663324f1da1c.png)
+![search hebrew](https://user-images.githubusercontent.com/64857968/137463162-04f3d3c1-b87c-4077-ab70-9a172c9159d8.gif)
+
 
 ![תפריט](https://user-images.githubusercontent.com/64857968/137454148-d0d47a65-ceea-41c9-af92-c09c0b60c9d8.png)
 
