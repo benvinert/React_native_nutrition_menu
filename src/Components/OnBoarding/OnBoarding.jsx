@@ -126,7 +126,6 @@ const OnBoarding = ({ route }) => {
                 backgroundColor: COLORS.blue,
               }}
               onPress={() => {
-                console.log("Button on pressed");
                 navigation.navigate("Home");
               }}
             >

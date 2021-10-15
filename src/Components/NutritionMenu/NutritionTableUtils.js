@@ -11,7 +11,6 @@ export const calculateMealMacros = (eachMeal) => {
     mealMacros.COLLESTEROL += eachFood.COLLESTEROL;
     mealMacros.FAT += eachFood.FAT;
   });
-  console.log("Final Meal Macros", mealMacros);
   return mealMacros;
 };
 

@@ -1,11 +1,9 @@
 import { serverPath, getFood } from "../../Constants";
 
 export const getFoodById = async (food, setShowValues, setValuesOfFood) => {
-  console.log(food);
   await fetch(`${serverPath}${getFood.getFoodById}${food.id}`)
     .then((response) => response.json())
     .then((jsonResponse) => {
-      console.log(jsonResponse);
       setValuesOfFood({
         ...jsonResponse,
         foodFromRequest: { ...jsonResponse }, //with that original object we calculate serving size(150g,200g,250g)

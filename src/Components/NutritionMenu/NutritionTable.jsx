@@ -52,7 +52,6 @@ export const NutritionTable = ({ route, navigation }) => {
   //TODO When save menu save NOT DUPLICATE!!!
   const sumOfMenuMacros = calculatMenuMacros(menuObject);
   const { applicationTheme } = useContext(themeContext);
-  console.log(sumOfMenuMacros);
   return (
     <ScrollView
       style={{

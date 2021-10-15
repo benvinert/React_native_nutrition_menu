@@ -32,7 +32,6 @@ export default function Settings({ navigation, route }) {
         if (prev.language == "English") {
           return he;
         } else {
-          console.log("hereeee");
           return en;
         }
       });

@@ -10,7 +10,6 @@ export const menuReducer = (state, action) => {
     case "REMOVE_FOOD":
       let indexOfMeal = action.param.indexOfMeal;
       let indexOfFoodToRemove = action.param.indexOfFoodToRemove;
-      console.log(state.menu);
       state.menu[indexOfMeal].foods.splice(indexOfFoodToRemove, 1);
       return { ...state };
     case "SAVE_NAME_MENU":

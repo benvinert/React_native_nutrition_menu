@@ -27,7 +27,6 @@ export default function NutritionTableNavigator({ route, navigation }) {
     JSON.parse(JSON.stringify(INIT_STATE_OF_MENU))
   );
   const { language } = useContext(translationsContext);
-  console.log("HEBREWWWWW", language.app);
   return (
     <createMenuContext.Provider value={{ menuState, menuDispatch }}>
       <Stack.Navigator initialRouteName={route.params.navigateTo}>

@@ -1,18 +1,31 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, Button, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  SafeAreaView,
+  Image,
+  ImageBackground,
+} from "react-native";
 import { themeContext } from "../../ThemeProvider/ThemeManager";
 
 export default function Home() {
   const { applicationTheme } = useContext(themeContext);
-  console.log(applicationTheme);
   return (
     <SafeAreaView>
-      <Button title="heyy" />
-      <Text styles={styles.container}>
-        dasdsafsafsagsagsagsagsa fsa fsa gsa
-      </Text>
+      <Image
+        source={{
+          uri: "https://static.toiimg.com/thumb/81551320.cms?width=680&height=512&imgsize=967762",
+        }}
+        resizeMode="cover"
+        style={{
+          width: "100%",
+          height: "80%",
+        }}
+      />
       <View styles={styles.container}>
-        <Text styles={{ fontSize: 15 }}>dsaddsasa</Text>
+        <Button title="Getting started" />
       </View>
     </SafeAreaView>
   );
@@ -20,10 +33,6 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 3,
-    borderColor: "blue",
-    backgroundColor: "green",
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
