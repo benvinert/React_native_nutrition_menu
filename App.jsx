@@ -18,6 +18,8 @@ import Settings from "./src/Pages/Settings/Settings";
 import en from "./src/translations/en";
 import he from "./src/translations/he";
 import { translationsContext } from "./src/translations/LocaleManager";
+import { useTheme } from "./src/Custom-Hooks/useTheme";
+import { useLanguage } from "./src/Custom-Hooks/useLanguage";
 
 const Drawer = createDrawerNavigator();
 const theme = {
@@ -35,8 +37,8 @@ const theme = {
 
 export default function App() {
   //Store//
-  const [applicationTheme, setApplicationTheme] = useState(darkMode);
-  const [language, setLanguage] = useState(he);
+  const [applicationTheme, setApplicationTheme] = useTheme(darkMode);
+  const [language, switchLanguage] = useLanguage();
   //-----//
 
   return (
@@ -81,7 +83,7 @@ export default function App() {
                   initialParams={{
                     navigateTo: "Settings",
                     setTheme: setApplicationTheme,
-                    setLanguage: setLanguage,
+                    switchLanguage: switchLanguage,
                   }}
                   options={{ title: language.app.settings }}
                 />

@@ -17,27 +17,27 @@ export default function Settings({ navigation, route }) {
 
   const [isEnabled, setIsEnabled] = useState(false);
   const [isEnabledLanguage, setIsEnabledLanguage] = useState(false);
-  const toggleSwitch = (param) => {
-    if (param == "Theme") {
-      route.params.setTheme((prevTheme) => {
-        if (prevTheme.mode === "dark") {
-          return defaultMode;
-        } else {
-          return darkMode;
-        }
-      });
-      setIsEnabled((previousState) => !previousState);
-    } else {
-      route.params.setLanguage((prev) => {
-        if (prev.language == "English") {
-          return he;
-        } else {
-          return en;
-        }
-      });
-      setIsEnabledLanguage((previousState) => !previousState);
+  const toggleSwitch = (switchType) => {
+    switch (switchType) {
+      case "Theme":
+        route.params.setTheme((prevTheme) => {
+          if (prevTheme.mode === "dark") {
+            return defaultMode;
+          } else {
+            return darkMode;
+          }
+        });
+        setIsEnabled((previousState) => !previousState);
+        break;
+      case "Language":
+        route.params.switchLanguage();
+        setIsEnabledLanguage((previousState) => !previousState);
+        break;
+      default:
+        throw Error("param not found");
     }
   };
+
   return (
     <View>
       <View>
@@ -74,7 +74,9 @@ export default function Settings({ navigation, route }) {
             trackColor={{ false: "#767577", true: "#81b0ff" }}
             thumbColor={isEnabledLanguage ? "#f5dd4b" : "#f4f3f4"}
             ios_backgroundColor="#3e3e3e"
-            onValueChange={() => toggleSwitch("Language")}
+            onValueChange={() => {
+              toggleSwitch("Language");
+            }}
             value={isEnabledLanguage}
           />
           <Text style={{ color: applicationTheme.styles.textColor }}>
