@@ -44,38 +44,63 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <ToastProvider maxToasts={2}>
-        <themeContext.Provider value={{ applicationTheme }}>
-          <translationsContext.Provider value={{ language }}>
-            <NavigationContainer theme={applicationTheme}>
+        <NavigationContainer theme={applicationTheme}>
+          <themeContext.Provider value={{ applicationTheme }}>
+            <translationsContext.Provider value={{ language }}>
               <Drawer.Navigator initialRouteName={Home}>
                 <Drawer.Screen
                   name="Tips"
                   component={OnBoarding}
                   initialParams={{ navigateTo: "Tips" }}
-                  options={{ title: language.app.tips }}
+                  options={{
+                    title: language.app.tips,
+                    drawerLabelStyle: {
+                      alignSelf: "center",
+                    },
+                  }}
                 />
                 <Drawer.Screen
                   name="Home"
                   component={Home}
-                  options={{ title: language.app.welcome }}
+                  options={{
+                    title: language.app.welcome,
+                    drawerLabelStyle: {
+                      alignSelf: "center",
+                    },
+                  }}
                 />
                 <Drawer.Screen
                   name="My menus"
                   component={NutritionTableNavigator}
                   initialParams={{ navigateTo: "AllMenus" }}
-                  options={{ title: language.app.my_menus }}
+                  options={{
+                    title: language.app.my_menus,
+                    drawerLabelStyle: {
+                      alignSelf: "center",
+                    },
+                  }}
                 />
                 <Drawer.Screen
                   name="BMR Calculator"
                   initialParams={{ myname: "ben" }}
                   component={BmrCalculator}
-                  options={{ title: language.app.bmr_calculator }}
+                  options={{
+                    title: language.app.bmr_calculator,
+                    drawerLabelStyle: {
+                      alignSelf: "center",
+                    },
+                  }}
                 />
                 <Drawer.Screen
                   name="Create Menu"
                   component={NutritionTableNavigator}
                   initialParams={{ navigateTo: "Select name of menu" }}
-                  options={{ title: language.app.create_menu }}
+                  options={{
+                    title: language.app.create_menu,
+                    drawerLabelStyle: {
+                      alignSelf: "center",
+                    },
+                  }}
                 />
                 <Drawer.Screen
                   name="Settings"
@@ -85,12 +110,17 @@ export default function App() {
                     setTheme: setApplicationTheme,
                     switchLanguage: switchLanguage,
                   }}
-                  options={{ title: language.app.settings }}
+                  options={{
+                    title: language.app.settings,
+                    drawerLabelStyle: {
+                      alignSelf: "center",
+                    },
+                  }}
                 />
               </Drawer.Navigator>
-            </NavigationContainer>
-          </translationsContext.Provider>
-        </themeContext.Provider>
+            </translationsContext.Provider>
+          </themeContext.Provider>
+        </NavigationContainer>
       </ToastProvider>
     </ThemeProvider>
   );
